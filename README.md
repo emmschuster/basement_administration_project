@@ -1,4 +1,5 @@
-# Basement Administration (Kellerverwaltung)
-Bei diesem Projekt geht es darum eine Webseite zu erstellen, welche die Verwaltung von
-Nahrungsmittel, im Bezug auf verschiedene Rezepte, im Keller übernimmt.
-Auf einer Webseite kann man ganz einfach durch Rezepte stöbern, das Inventar im Auge behalten und sich Statistiken über das eigene Backverhalten ansehen.
+# Basement Administration 
+## Kellerverwaltung(Vorratsverwaltungssystem mit integriertem
+Rezeptbuch)
+Der Zweck dieses Projektes ist es, einen Überblick über die Rezepte, das Inventar und dem
+Backverhalten zu geben. Es ist eine Vorratsverwaltung und Kochbuch in einem.
