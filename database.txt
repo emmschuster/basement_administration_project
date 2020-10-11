@@ -1,0 +1,13 @@
+CREATE TABLE rezept (
+RezID int auto_increment not null primary key,
+Name varchar(50) not null,
+Anleitung varchar(1000) not null
+);
+
+CREATE TABLE zutat (
+ZutID int auto_increment not null primary key,
+Name varchar(50) not null,
+Menge float not null,
+minMange float not null,
+Einheit varchar(5) not null
+);
