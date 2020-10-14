@@ -1,0 +1,57 @@
+#Bild als BLOB kommt noch in die Tabelle rezept
+
+CREATE TABLE rezept (
+RezID int auto_increment not null primary key,
+Name varchar(50) not null,
+Anleitung varchar(1000) not null
+);
+
+CREATE TABLE zutat (
+ZutID int auto_increment not null primary key,
+Name varchar(50) not null,
+minMange float not null,
+Einheit varchar(5) not null
+);
+
+CREATE TABLE fusion (
+Menge float,
+ZutID int not null,
+RezID int not null,
+Foreign key (ZutID) references Zutat (ZutID),
+Foreign key (RezID) references Rezept (RezID),
+Primary key (RezID, ZutID)
+);
+
+insert into rezept (Name, Anleitung) values ("Schoki Muffin", "Oamfach alles zammen schuetten");
+mysql> select * from Rezept;
++-------+---------------+--------------------------------+
+| RezID | Name          | Anleitung                      |
++-------+---------------+--------------------------------+
+|     1 | Schoki Muffin | Oamfach alles zammen schuetten |
++-------+---------------+--------------------------------+
+
+mysql> insert into zutat (Name, minMange, Einheit) values ("Mehl", 5, "kg");
+mysql> insert into zutat (Name, minMange, Einheit) values ("Zucker",3,"kg");
+insert into zutat (Name, minMange, Einheit) values ("Milch",2,"L");
+
+mysql> select * from zutat;
++-------+--------+----------+---------+
+| ZutID | Name   | minMange | Einheit |
++-------+--------+----------+---------+
+|     1 | Mehl   |        5 | kg      |
+|     2 | Zucker |        3 | kg      |
+|     3 | Milch  |        2 | L       |
++-------+--------+----------+---------+
+
+insert into fusion (Menge, ZutID, RezID) values (0.3,1,1);
+insert into fusion (Menge, ZutID, RezID) values (0.25,2,1);
+insert into fusion (Menge, ZutID, RezID) values (0.12,3,1);
+
+mysql> select * from fusion;
++-------+-------+-------+
+| Menge | ZutID | RezID |
++-------+-------+-------+
+|   0.3 |     1 |     1 |
+|  0.25 |     2 |     1 |
+|  0.12 |     3 |     1 |
++-------+-------+-------+
