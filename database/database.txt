@@ -55,3 +55,25 @@ mysql> select * from fusion;
 |  0.25 |     2 |     1 |
 |  0.12 |     3 |     1 |
 +-------+-------+-------+
+
+Nach weiteren INSTER-Befehlen, hier der Join um alles zu sehen:
+SELECT r.name, z.name, f.menge from Rezept r join fusion f on f.RezID = r.RezID join Zutat z on f.ZutID = z.ZutID;
++---------------+-------------+-------+
+| name          | name        | menge |
++---------------+-------------+-------+
+| Schoki Muffin | Mehl        |   0.3 |
+| Schoki Muffin | Zucker      |  0.25 |
+| Schoki Muffin | Milch       |  0.12 |
+| Donuts        | Mehl        |   0.5 |
+| Donuts        | Hafer Milch |   0.2 |
++---------------+-------------+-------+
+
+Join, wenn ma nur die Schoki Muffins haben will UND die Einheit:
+SELECT r.name, z.name, f.menge, z.einheit from Rezept r join fusion f on f.RezID = r.RezID join Zutat z on f.ZutID = z.ZutID where r.RezID = 1;
++---------------+--------+-------+---------+
+| name          | name   | menge | einheit |
++---------------+--------+-------+---------+
+| Schoki Muffin | Mehl   |   0.3 | kg      |
+| Schoki Muffin | Zucker |  0.25 | kg      |
+| Schoki Muffin | Milch  |  0.12 | L       |
++---------------+--------+-------+---------+
