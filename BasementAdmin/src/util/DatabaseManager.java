@@ -1,14 +1,18 @@
+package util;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.Scanner;
 
 public class DatabaseManager {
-    static Connection con = null;
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    Connection con = null;
+
+    public DatabaseManager() throws SQLException, ClassNotFoundException {
         getConnection();
     }
-    public static Connection getConnection()
+
+    public Connection getConnection()
             throws ClassNotFoundException, SQLException {
         Scanner scan = null;
         try {

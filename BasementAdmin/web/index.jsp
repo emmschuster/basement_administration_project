@@ -1,3 +1,6 @@
+<%@ page import="java.sql.Connection"%>
+<%@ page import="util.DatabaseManager"%>
+<%@ page import="util.Perform" %>
 <%--
   Created by IntelliJ IDEA.
   User: Emma Mango Jango
@@ -12,9 +15,15 @@
     <title>Kellerverwaltung</title>
 </head>
 <body>
-<% //Perform p = new Perform();
-
+<!--- <%
+    Connection con;
+    DatabaseManager dm = new DatabaseManager();
+    con = dm.getConnection();
+    Perform p = new Perform(con);
+    p.getRezeptName(1);
 %>
+<p><%out.print(" Penis");%></p>
+<p><%p.getRezeptName(1);%></p>
 <script src="myScript.js"></script>
 <div class="column left">
     <h3>Inhaltsverzeichnis</h3>
@@ -37,6 +46,6 @@
 <div class="column right">
     <h2> Willkommen im Keller </h2>
     <button type="button" onclick="myFunction()">Try it</button>
-</div>
+</div> --->
 </body>
 </html>
