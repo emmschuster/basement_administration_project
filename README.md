@@ -11,7 +11,7 @@ The goal of this poject is taht I don't need a written book for my recipes anymo
 - a warning system alerts you when you have not much left of one product (minimum stock)
 ## Want to install my project?
 ```
-git clone https://github.com/Jeschusmorio/Badger.git
+git clone https://github.com/emmschuster/basement_administration_project
 ```
 ## Contact
 If you have questions/concerns/comments, please feel free to contact me and send my an [E-Mail](emmschuster@tsn.at)
