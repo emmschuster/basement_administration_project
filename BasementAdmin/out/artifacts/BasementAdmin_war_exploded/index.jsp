@@ -15,8 +15,7 @@
     <title>Kellerverwaltung</title>
 </head>
 <body>
-<%
-
+<!--- <%
     Connection con;
     DatabaseManager dm = new DatabaseManager();
     con = dm.getConnection();
@@ -47,6 +46,6 @@
 <div class="column right">
     <h2> Willkommen im Keller </h2>
     <button type="button" onclick="myFunction()">Try it</button>
-</div>
+</div> --->
 </body>
 </html>
