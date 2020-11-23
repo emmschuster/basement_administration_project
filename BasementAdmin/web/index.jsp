@@ -1,6 +1,12 @@
 <%@ page import="java.sql.Connection"%>
 <%@ page import="util.DatabaseManager"%>
 <%@ page import="util.Perform" %>
+
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
+
+
 <%--
   Created by IntelliJ IDEA.
   User: Emma Mango Jango
@@ -15,37 +21,27 @@
     <title>Kellerverwaltung</title>
 </head>
 <body>
-<!--- <%
-    Connection con;
-    DatabaseManager dm = new DatabaseManager();
-    con = dm.getConnection();
-    Perform p = new Perform(con);
-    p.getRezeptName(1);
-%>
-<p><%out.print(" Penis");%></p>
-<p><%p.getRezeptName(1);%></p>
-<script src="myScript.js"></script>
-<div class="column left">
-    <h3>Inhaltsverzeichnis</h3>
-    <div class="column small">
-        <a href="index.html">Startseite</a>
-    </div>
-    <div class="column small">
-        <a href="rezepte.html">Rezepte</a>
-    </div>
-    <div class="column small">
-        <a href="inventar.html">Inventar</a>
-    </div>
-    <div class="column small">
-        <a href="rhinzu.html">Rezept hinzufügen</a>
-    </div>
-    <div class="column small">
-        <a href="invhinzu.html">Inventar erweitern</a>
-    </div>
-</div>
-<div class="column right">
-    <h2> Willkommen im Keller </h2>
-    <button type="button" onclick="myFunction()">Try it</button>
-</div> --->
+<sql:setDataSource var = "snapshot" driver = "mysql-connector-java-8.0.21"
+                   url = "jdbc:mysql://localhost:3306/kellerverw?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true"
+                   user = "root"  password = "BonsaiEmma123"/>
+
+<sql:query dataSource = "${snapshot}" var = "result">
+    SELECT z.name, f.menge, z.einheit from Rezept r join fusion f on f.RezID = r.RezID join Zutat z on f.ZutID = z.ZutID where r.RezID = 1;
+</sql:query>
+    <h1>${row.name}</h1>
+<table border = "1" width = "100%">
+    <tr>
+        <th>Zuatet</th>
+        <th>Menge</th>
+        <th>Einheit</th>
+    </tr>
+    <c:forEach var = "row" items = "${result.rows}">
+        <tr>
+            <td><c:out value = "${row.z.name}"/></td>
+            <td><c:out value = "${row.f.menge}"/></td>
+            <td><c:out value = "${row.z.einheit}"/></td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>
