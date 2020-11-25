@@ -52,3 +52,7 @@ select * from rezept;
 
 insert into rezept (Name, Anleitung) values ('Rumkugeln', 'geiler scheiss he');
 
+insert into zutat (Name, minMange, Einheit) values ("Koch Schoki",2,"Pkg");
+insert into fusion (Menge, ZutID, RezID) values (0.5,4,5);
+insert into fusion (Menge, ZutID, RezID) values (0.25,2,5);
+insert into fusion (Menge, ZutID, RezID) values (0.12,3,5);

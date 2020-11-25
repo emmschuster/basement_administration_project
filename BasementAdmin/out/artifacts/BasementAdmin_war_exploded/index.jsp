@@ -1,6 +1,12 @@
 <%@ page import="java.sql.Connection"%>
 <%@ page import="util.DatabaseManager"%>
 <%@ page import="util.Perform" %>
+
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%--<%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %> --%>
+
+
 <%--
   Created by IntelliJ IDEA.
   User: Emma Mango Jango
@@ -15,7 +21,7 @@
     <title>Kellerverwaltung</title>
 </head>
 <body>
-<sql:setDataSource var = "snapshot" driver = "mysql-connector-java-8.0.21"
+<%--<sql:setDataSource var = "snapshot" driver = "mysql-connector-java-8.0.21"
                    url = "jdbc:mysql://localhost:3306/kellerverw?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true"
                    user = "root"  password = "BonsaiEmma123"/>
 
@@ -25,7 +31,7 @@
     <h1>${row.name}</h1>
 <table border = "1" width = "100%">
     <tr>
-        <th>Zuatet</th>
+        <th>Zutat</th>
         <th>Menge</th>
         <th>Einheit</th>
     </tr>
@@ -36,6 +42,29 @@
             <td><c:out value = "${row.z.einheit}"/></td>
         </tr>
     </c:forEach>
-</table>
+</table> --%>
+<%@ page import = "java.sql.*"%>Obtaining a Connection
+
+
+<%
+    Connection conn=null;
+    ResultSet result=null;
+    Statement stmt=null;
+    ResultSetMetaData rsmd=null;
+    try {
+        Class c=Class.forName("com.mysql.jdbc.Driver");     //mysql-connector-java-8.0.21
+    }
+    catch(Exception e){
+        out.write("Error!!!!!!" + e);
+    }
+    try {
+        conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/kellerverw?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true",
+                "root","BonsaiEmma123");
+        out.write("Connected!");
+    }
+    catch(SQLException e) {
+        System.out.println("Error!!!!!!" + e);
+    }
+%>
 </body>
 </html>
