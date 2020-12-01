@@ -4,6 +4,9 @@
 
 <%@ page import = "java.io.*,java.util.*,java.sql.*"%>
 <%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+
+<%@ page import = "java.sql.*"%>Obtaining a Connection
+
 <%--<%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %> --%>
 
 
@@ -20,14 +23,45 @@
     <link 	rel="StyleSheet" href="allinall.css">
     <title>Kellerverwaltung</title>
 </head>
+
 <body>
-<%--<sql:setDataSource var = "snapshot" driver = "mysql-connector-java-8.0.21"
+<!---
+<sql:setDataSource var = "snapshot" driver = "mysql-connector-java-8.0.21"
                    url = "jdbc:mysql://localhost:3306/kellerverw?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true"
                    user = "root"  password = "BonsaiEmma123"/>
 
 <sql:query dataSource = "${snapshot}" var = "result">
     SELECT z.name, f.menge, z.einheit from Rezept r join fusion f on f.RezID = r.RezID join Zutat z on f.ZutID = z.ZutID where r.RezID = 1;
 </sql:query>
+--->
+
+<%
+    Class.forName("com.mysql.jdbc.Driver");
+    DatabaseManager dm = new DatabaseManager();
+    Connection con = dm.getConnection();
+    Perform p = new Perform(con);
+    p.getRezeptName(1);
+    p.getZutatenVonRezept(1);
+%>
+
+<div class="column left">
+    <h3>Inhaltsverzeichnis</h3>
+    <div class="column small">
+        <a href="index.html">Startseite</a>
+    </div>
+    <div class="column small">
+        <a href="rezepte.html">Rezepte</a>
+    </div>
+    <div class="column small">
+        <a href="inventar.html">Inventar</a>
+    </div>
+    <div class="column small">
+        <a href="rhinzu.html">Rezept hinzufügen</a>
+    </div>
+    <div class="column small">
+        <a href="invhinzu.html">Inventar erweitern</a>
+    </div>
+</div>
     <h1>${row.name}</h1>
 <table border = "1" width = "100%">
     <tr>
@@ -42,7 +76,13 @@
             <td><c:out value = "${row.z.einheit}"/></td>
         </tr>
     </c:forEach>
-</table> --%>
+</table> %>
+
+</body>
+
+</html>
+
+<%--
 <%@ page import = "java.sql.*"%>Obtaining a Connection
 
 
@@ -51,8 +91,8 @@
     ResultSet result=null;
     Statement stmt=null;
     ResultSetMetaData rsmd=null;
-    try {
-        Class c=Class.forName("com.mysql.jdbc.Driver");     //mysql-connector-java-8.0.21
+    /*try {
+        Class.forName("mysql-connector-java-8.0.21");     //mysql-connector-java-8.0.21
     }
     catch(Exception e){
         out.write("Error!!!!!!" + e);
@@ -64,7 +104,15 @@
     }
     catch(SQLException e) {
         System.out.println("Error!!!!!!" + e);
-    }
+    }*/
+    import java.util.Scanner;
+    Connection con = null;
+
+    if (scan.hasNext()) {
+    con = DriverManager.getConnection(
+    "jdbc:mysql://localhost:3306/kellerverw?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true",  // DB
+    "root",                                 // User
+    scan.nextLine()                        // Passwort
+    );
 %>
-</body>
-</html>
+Comment --%>
