@@ -1,9 +1,14 @@
 package util;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+import models.Rezept;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Perform {
     static Connection conn = null;
@@ -12,20 +17,22 @@ public class Perform {
         this.conn=con;
     }
 
-    public void getRezeptName(int rID) {
+    public String getRezeptName(int rID) {
         try (Statement stmt = conn.createStatement()) {
             String name;
             ResultSet rs0 = stmt.executeQuery("SELECT name from rezept WHERE RezID="+rID+";");
-            while (rs0.next()) {
+            if (rs0.next()) {
                 name = rs0.getString("name");
-                System.out.println(name);
+                return name;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return null;
     }
 
-    public void getZutatenVonRezept(int rID) {
+    public String getZutatenVonRezept(int rID) {
+        StringBuilder builder = new StringBuilder();
         try (Statement stmt = conn.createStatement()) {
             String zName,fMenge,zEinheit;
             ResultSet rs0 = stmt.executeQuery("SELECT z.name, f.menge, z.einheit from Rezept r " +
@@ -34,11 +41,28 @@ public class Perform {
                 zName = rs0.getString("z.name");
                 fMenge = rs0.getString("f.menge");
                 zEinheit = rs0.getString("z.einheit");
-                System.out.println(zName+"  "+fMenge+"  "+zEinheit);
+                builder.append(zName+"  "+fMenge+"  "+zEinheit + "\n");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return builder.toString();
+    }
+
+    public List<Rezept> getRezepte() {
+        List<Rezept> list = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs0 = stmt.executeQuery("SELECT rezid, name FROM Rezept;");
+            while(rs0.next()) {
+                int id = rs0.getInt("rezid");
+                String name = rs0.getString("name");
+                Rezept rezept = new Rezept(id, name);
+                list.add(rezept);
+            }
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
     }
 
     public void ausfueren() {

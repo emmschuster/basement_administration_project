@@ -10,7 +10,7 @@ public class MainClass {
         DatabaseManager dm = new DatabaseManager();
         con = dm.getConnection();
         Perform p = new Perform(con);
-        p.getRezeptName(1);
-        p.getZutatenVonRezept(1);
+        System.out.println(p.getRezeptName(1));
+        System.out.print(p.getZutatenVonRezept(1));
     }
 }
