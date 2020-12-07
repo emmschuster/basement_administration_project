@@ -6,7 +6,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link 	rel="StyleSheet" href="allinall.css">
+    <!-- <link 	rel="StyleSheet" href="allinall.css">
+    <jsp:include page="allinall.css"/> -->
     <title>Kellerverwaltung</title>
 </head>
 
@@ -40,21 +41,22 @@
     </div>
 </div>
     <p><% List<Rezept> rezepte = p.getRezepte();
-    out.append(String.valueOf(rezepte.get(0).getId()));
-        out.append(rezepte.get(0).getName()); %></p>
-
+        //out.append(String.valueOf(rezepte.get(0).getId()));
+        //out.append(rezepte.get(0).getName()); %></p>
+<div float="right">
     <h1>Rezepte</h1>
 <ul>
     <li>
-        <a href="/rezept.jsp?id=1">hi</a>
+        <a href="/rezept.jsp?id=1"><% out.append(rezepte.get(5).getName()); %></a>
     </li>
     <li>
-        <a href=""><% out.append(String.valueOf(rezepte.get(0).getId())); %> </a>
+        <a href=""><% out.append(rezepte.get(0).getName()); %> </a>
     </li>
     <li>
-        <a href=""><!-- rezeptname --></a>
+        <a href=""><% out.append(rezepte.get(3).getName()); %></a>
     </li>
 </ul>
+</div>
 </body>
 </html>
 
