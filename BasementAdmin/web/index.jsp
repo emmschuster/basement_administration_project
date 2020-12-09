@@ -1,5 +1,5 @@
-<%@ page import="java.sql.Connection"%>
-<%@ page import="util.DatabaseManager"%>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="util.DatabaseManager" %>
 <%@ page import="util.Perform" %>
 <%@ page import="models.Rezept" %>
 <%@ page import="java.util.List" %>
@@ -9,6 +9,25 @@
     <!-- <link 	rel="StyleSheet" href="allinall.css">
     <jsp:include page="allinall.css"/> -->
     <title>Kellerverwaltung</title>
+    <style>
+        h2, h3, h4, h5 {
+            font-family: arial black;
+            color: darkred;
+        }
+
+        .column.right {
+            width: 1000px;
+            margin: 20px;
+            height: 600px;
+        }
+
+        .column.left {
+            width: 200px;
+            background-color: #AFABAB;
+            margin: 20px;
+            height: 600px;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,22 +59,23 @@
         <a href="invhinzu.html">Inventar erweitern</a>
     </div>
 </div>
-    <p><% List<Rezept> rezepte = p.getRezepte();
-        //out.append(String.valueOf(rezepte.get(0).getId()));
-        //out.append(rezepte.get(0).getName()); %></p>
+<p><% List<Rezept> rezepte = p.getRezepte();
+    //out.append(String.valueOf(rezepte.get(0).getId()));
+    //out.append(rezepte.get(0).getName()); %></p>
 <div float="right">
     <h1>Rezepte</h1>
-<ul>
-    <li>
-        <a href="/rezept.jsp?id=1"><% out.append(rezepte.get(5).getName()); %></a>
-    </li>
-    <li>
-        <a href=""><% out.append(rezepte.get(0).getName()); %> </a>
-    </li>
-    <li>
-        <a href=""><% out.append(rezepte.get(3).getName()); %></a>
-    </li>
-</ul>
+    <ul>
+        <li>
+            <a href="/rezept.jsp"><% out.append(rezepte.get(5).getName()); %></a> //rezept.jsp?id=1
+        </li>
+        <li>
+            <% request.getRequestDispatcher("/rezept.jsp").forward(request, response); %>
+            <a href="">"/rezept.jsp"<% out.append(rezepte.get(0).getName()); %></a>
+        </li>
+        <li>
+            <a href=""><% out.append(rezepte.get(3).getName()); %></a>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

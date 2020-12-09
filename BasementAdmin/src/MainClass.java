@@ -6,6 +6,7 @@ import java.sql.*;
 
 public class MainClass {
     static Connection con;
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseManager dm = new DatabaseManager();
         con = dm.getConnection();

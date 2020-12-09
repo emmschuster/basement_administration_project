@@ -13,7 +13,7 @@ public class Rezept {
     }
 
     public Rezept(int id, String name) {
-        this. id = id;
+        this.id = id;
         this.name = name;
     }
 }

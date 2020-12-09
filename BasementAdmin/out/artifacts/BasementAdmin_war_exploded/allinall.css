@@ -48,6 +48,7 @@ a {
 }
 h2,h3,h4,h5 {
     font-family: arial black;
+    color: darkred;
 }
 #rezeepte {
     overflow: scroll;

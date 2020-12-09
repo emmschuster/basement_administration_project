@@ -9,6 +9,23 @@
     <!-- <link 	rel="StyleSheet" href="allinall.css">
     <jsp:include page="allinall.css"/> -->
     <title>Kellerverwaltung</title>
+    <style>
+        h2,h3,h4,h5 {
+            font-family: arial black;
+            color: darkred;
+        }
+        .column.right {
+        width: 1000px;
+        margin: 20px;
+        height: 600px;
+    }
+    .column.left {
+        width: 200px;
+        background-color: #AFABAB;
+        margin: 20px;
+        height: 600px;
+    }
+    </style>
 </head>
 
 <body>
@@ -47,10 +64,11 @@
     <h1>Rezepte</h1>
 <ul>
     <li>
-        <a href="/rezept.jsp?id=1"><% out.append(rezepte.get(5).getName()); %></a>
+        <a href="/rezept.jsp"><% out.append(rezepte.get(5).getName()); %></a>       //rezept.jsp?id=1
     </li>
     <li>
-        <a href=""><% out.append(rezepte.get(0).getName()); %> </a>
+        <% request.getRequestDispatcher("/rezept.jsp").forward(request, response); %>
+        <a href="">"/rezept.jsp"<% out.append(rezepte.get(0).getName()); %> </a>
     </li>
     <li>
         <a href=""><% out.append(rezepte.get(3).getName()); %></a>
