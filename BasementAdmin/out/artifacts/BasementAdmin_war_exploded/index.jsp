@@ -64,15 +64,15 @@
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
 <div float="right">
-    <h1 style="color:blue;" >Rezepte</h1>
+    <h1>Rezepte</h1>
     <ul>
         <li>
-            <% request.getRequestDispatcher("/rezept.jsp").forward(request, response); %>
-            <a href="/rezept.jsp"><% out.append(rezepte.get(5).getName()); %></a> //rezept.jsp?id=1
+            <!-- request.getRequestDispatcher("rezept.jsp").forward(request, response); -->
+            <a href="rezept.jsp"><% out.append(rezepte.get(5).getName()); //rezept.jsp?id=1%></a>
         </li>
         <li>
-            <% //request.getRequestDispatcher("/index.jsp").forward(request, response); %>
-            <a href="">"/index.jsp"<% out.append(rezepte.get(0).getName()); %></a>
+            <!-- request.getRequestDispatcher("index.jsp").forward(request, response); -->
+            <a href="index.jsp"><% out.append(rezepte.get(0).getName()); %></a>
         </li>
         <li>
             <a href=""><% out.append(rezepte.get(3).getName()); %></a>
