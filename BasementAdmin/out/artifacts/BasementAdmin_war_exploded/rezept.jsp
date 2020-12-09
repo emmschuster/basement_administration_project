@@ -1,5 +1,5 @@
-<%@ page import="java.sql.Connection"%>
-<%@ page import="util.DatabaseManager"%>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="util.DatabaseManager" %>
 <%@ page import="util.Perform" %>
 <%@ page import="models.Rezept" %>
 <%@ page import="java.util.List" %>
@@ -13,14 +13,14 @@
 
 <body>
 <%
-    /* try {
+    try {
         Class.forName("com.mysql.cj.jdbc.Driver");
     } catch (ClassNotFoundException e) {
         e.printStackTrace();
     }
     DatabaseManager dm = new DatabaseManager();
     Connection con = dm.getConnection();
-    Perform p = new Perform(con); */
+    Perform p = new Perform(con);
 %>
 <div class="column left">
     <h3>Inhaltsverzeichnis</h3>
@@ -44,33 +44,33 @@
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
 <div float="right">
-    <h1>Rezepte</h1>
-<table>
-    <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Anleitung</th>
-</tr>
-    <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-    </tr>
-    <tr>
-        <td>Centro comercial Moctezuma</td>
-        <td>Francisco Chang</td>
-        <td>Mexico</td>
-    </tr>
-    <tr>
-        <td>Ernst Handel</td>
-        <td>Roland Mendel</td>
-        <td>Austria</td>
-    </tr>
-    <tr>
-        <td>Island Trading</td>
-        <td>Helen Bennett</td>
-        <td>UK</td>
-    </tr>
+    <h1 style="color:blue;" >Rezepte</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Anleitung</th>
+        </tr>
+        <tr>
+            <td><% out.append((char) rezepte.get(0).getId());%></td>
+            <td><% out.append(rezepte.get(0).getName());%></td>
+            <td><% out.append(rezepte.get(0).getAnleitung());%></td>
+        </tr>
+        <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+        </tr>
+        <tr>
+            <td>Ernst Handel</td>
+            <td>Roland Mendel</td>
+            <td>Austria</td>
+        </tr>
+        <tr>
+            <td>Island Trading</td>
+            <td>Helen Bennett</td>
+            <td>UK</td>
+        </tr>
     </table>
 </div>
 </body>

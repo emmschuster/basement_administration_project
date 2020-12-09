@@ -44,7 +44,7 @@
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
 <div float="right">
-    <h1>Rezepte</h1>
+    <h1 style="color:blue;" >Rezepte</h1>
     <table>
         <tr>
             <th>ID</th>
@@ -52,9 +52,9 @@
             <th>Anleitung</th>
         </tr>
         <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
+            <td><% out.append((char) rezepte.get(0).getId());%></td>
+            <td><% out.append(rezepte.get(0).getName());%></td>
+            <td><% out.append(rezepte.get(0).getAnleitung());%></td>
         </tr>
         <tr>
             <td>Centro comercial Moctezuma</td>

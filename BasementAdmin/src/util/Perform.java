@@ -52,11 +52,12 @@ public class Perform {
     public List<Rezept> getRezepte() {
         List<Rezept> list = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
-            ResultSet rs0 = stmt.executeQuery("SELECT rezid, name FROM Rezept;");
+            ResultSet rs0 = stmt.executeQuery("SELECT rezid, name, anleitung FROM Rezept;");
             while (rs0.next()) {
                 int id = rs0.getInt("rezid");
                 String name = rs0.getString("name");
-                Rezept rezept = new Rezept(id, name);
+                String anleitung = rs0.getString("anleitung");
+                Rezept rezept = new Rezept(id, name, anleitung);
                 list.add(rezept);
             }
         } catch (SQLException ex) {

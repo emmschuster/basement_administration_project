@@ -3,6 +3,7 @@ package models;
 public class Rezept {
     private int id;
     private String name;
+    private String anleitung;
 
     public int getId() {
         return id;
@@ -12,8 +13,13 @@ public class Rezept {
         return name;
     }
 
-    public Rezept(int id, String name) {
+    public String getAnleitung() {
+        return anleitung;
+    }
+
+    public Rezept(int id, String name, String anleitung) {
         this.id = id;
         this.name = name;
+        this.anleitung=anleitung;
     }
 }

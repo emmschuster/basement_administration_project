@@ -41,13 +41,14 @@
     Connection con = dm.getConnection();
     Perform p = new Perform(con);
 %>
+
 <div class="column left">
     <h3>Inhaltsverzeichnis</h3>
     <div class="column small">
-        <a href="index.html">Startseite</a>
+        <a href="/index.jsp">Startseite</a>
     </div>
     <div class="column small">
-        <a href="rezepte.html">Rezepte</a>
+        <a href="/rezept.jsp">Rezepte</a>
     </div>
     <div class="column small">
         <a href="inventar.html">Inventar</a>
@@ -63,14 +64,15 @@
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
 <div float="right">
-    <h1>Rezepte</h1>
+    <h1 style="color:blue;" >Rezepte</h1>
     <ul>
         <li>
+            <% request.getRequestDispatcher("/rezept.jsp").forward(request, response); %>
             <a href="/rezept.jsp"><% out.append(rezepte.get(5).getName()); %></a> //rezept.jsp?id=1
         </li>
         <li>
-            <% request.getRequestDispatcher("/rezept.jsp").forward(request, response); %>
-            <a href="">"/rezept.jsp"<% out.append(rezepte.get(0).getName()); %></a>
+            <% //request.getRequestDispatcher("/index.jsp").forward(request, response); %>
+            <a href="">"/index.jsp"<% out.append(rezepte.get(0).getName()); %></a>
         </li>
         <li>
             <a href=""><% out.append(rezepte.get(3).getName()); %></a>
