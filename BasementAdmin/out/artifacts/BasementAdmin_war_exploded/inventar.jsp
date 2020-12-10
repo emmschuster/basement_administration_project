@@ -3,6 +3,7 @@
 <%@ page import="util.Perform" %>
 <%@ page import="models.Rezept" %>
 <%@ page import="java.util.List" %>
+<%@ page import="models.Inventar" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -78,12 +79,27 @@
         <a href="invhinzu.html">Inventar erweitern</a>
     </div>
 </div>
-<p><% List<Rezept> rezepte = p.getRezepte();
+<p><% List<Inventar> inv = p.getInventar();
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
 <div class="column right">
-    <h1>Willkommen im Keller</h1>
-    <h2 style="margin: 100px">Statistik?!</h2>
+    <h1>Inventar</h1>
+     <div>
+        <table style="width:100%; text-align: center">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>min Menge</th>
+                <th>Einheit</th>
+            </tr>
+            <tr>
+                <td><% //out.append((char) inv.get(0).getId());%></td>
+                <td><% //out.append(inv.get(0).getName());%></td>
+                <td><% //out.append((char) inv.get(0).getMinmenge());%></td>
+                <td><% //out.append(inv.get(0).getEinheit());%></td>
+            </tr>
+        </table>
+    </div>
 </div>
 </body>
 </html>

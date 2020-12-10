@@ -1,6 +1,7 @@
 package util;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+import models.Inventar;
 import models.Rezept;
 
 import java.sql.Connection;
@@ -49,6 +50,24 @@ public class Perform {
         return builder.toString();
     }
 
+    public List<Inventar> getInventar() {
+        List<Inventar> list = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs0 = stmt.executeQuery("SELECT zutid, name, minmenge, einheit FROM zutat;");
+            while (rs0.next()) {
+                int id = rs0.getInt("zutid");
+                String name = rs0.getString("name");
+                int minmenge = rs0.getInt("minmenge");
+                String einheit = rs0.getString("einheit");
+                Inventar inv = new Inventar(id, name, minmenge, einheit);
+                list.add(inv);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
     public List<Rezept> getRezepte() {
         List<Rezept> list = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
@@ -61,7 +80,7 @@ public class Perform {
                 list.add(rezept);
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+
         }
         return list;
     }

@@ -10,6 +10,23 @@
     <jsp:include page="allinall.css"/> -->
     <title>Kellerverwaltung</title>
     <style>
+        .column{
+            text-align : center;
+            color : black;
+            background-color : #d6d6c2;
+            border: 2px solid white;
+            border-radius: 0px;
+            float:left;
+            padding: 10px;
+        }
+        a {
+            text-decoration: none;
+            text-align: center;
+            color: black;
+            padding: 20px;
+            margin: 30px;
+        }
+
         h2, h3, h4, h5 {
             font-family: arial black;
             color: darkred;
@@ -19,6 +36,7 @@
             width: 1000px;
             margin: 20px;
             height: 600px;
+            background-color: #AFABAB;
         }
 
         .column.left {
@@ -45,13 +63,13 @@
 <div class="column left">
     <h3>Inhaltsverzeichnis</h3>
     <div class="column small">
-        <a href="/index.jsp">Startseite</a>
+        <a href="index.jsp">Startseite</a>
     </div>
     <div class="column small">
-        <a href="/rezept.jsp">Rezepte</a>
+        <a href="rezept.jsp">Rezepte</a>
     </div>
     <div class="column small">
-        <a href="inventar.html">Inventar</a>
+        <a href="inventar.jsp">Inventar</a>
     </div>
     <div class="column small">
         <a href="rhinzu.html">Rezept hinzufügen</a>
@@ -63,21 +81,9 @@
 <p><% List<Rezept> rezepte = p.getRezepte();
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
-<div float="right">
-    <h1>Rezepte</h1>
-    <ul>
-        <li>
-            <!-- request.getRequestDispatcher("rezept.jsp").forward(request, response); -->
-            <a href="rezept.jsp"><% out.append(rezepte.get(5).getName()); //rezept.jsp?id=1%></a>
-        </li>
-        <li>
-            <!-- request.getRequestDispatcher("index.jsp").forward(request, response); -->
-            <a href="index.jsp"><% out.append(rezepte.get(0).getName()); %></a>
-        </li>
-        <li>
-            <a href=""><% out.append(rezepte.get(3).getName()); %></a>
-        </li>
-    </ul>
+<div class="column right">
+    <h1>Willkommen im Keller</h1>
+    <h2 style="margin: 100px">Statistik?!</h2>
 </div>
 </body>
 </html>
