@@ -13,5 +13,6 @@ public class MainClass {
         Perform p = new Perform(con);
         System.out.println(p.getRezeptName(1));
         System.out.print(p.getZutatenVonRezept(1));
+        System.out.print(p.getZutatName(1));
     }
 }

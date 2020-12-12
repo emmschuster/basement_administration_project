@@ -80,6 +80,7 @@
     </div>
 </div>
 <p><% List<Inventar> inv = p.getInventar();
+    List<Rezept> rezepte = p.getRezepte();
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
 <div class="column right">
@@ -90,13 +91,15 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>min Menge</th>
+                <th>aktuelle Menge</th>
                 <th>Einheit</th>
             </tr>
             <tr>
-                <td><% //out.append((char) inv.get(0).getId());%></td>
-                <td><% //out.append(inv.get(0).getName());%></td>
-                <td><% //out.append((char) inv.get(0).getMinmenge());%></td>
-                <td><% //out.append(inv.get(0).getEinheit());%></td>
+                <td><% out.append((char) inv.get(1).getId());%></td>
+                <td><% out.append(inv.get(1).getName());%></td>
+                <td><% out.append((char) inv.get(1).getMinmenge());%></td>
+                <td>no ned vorhanden</td>
+                <td><% out.append(inv.get(1).getEinheit());%></td>
             </tr>
         </table>
     </div>
