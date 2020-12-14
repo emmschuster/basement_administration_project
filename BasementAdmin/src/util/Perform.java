@@ -60,6 +60,7 @@ public class Perform {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+            //builder.append("Datenbankfehler!!!");
         }
         return builder.toString();
     }

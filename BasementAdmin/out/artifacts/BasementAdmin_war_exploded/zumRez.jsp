@@ -45,6 +45,14 @@
             margin: 20px;
             height: 600px;
         }
+        .column.smallMini {
+            width: 100px;
+            background-color: #3B3838;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-top: 20px;
+            border: #767171;
+        }
     </style>
 </head>
 
@@ -67,6 +75,9 @@
     <div class="column small">
         <a href="rezept.jsp">Rezepte</a>
     </div>
+    <div class="column smallMini">
+        <a href="zumRez.jsp">Rezept Details</a>
+    </div>
     <div class="column small">
         <a href="inventar.jsp">Inventar</a>
     </div>
@@ -78,23 +89,30 @@
     </div>
 </div>
 <p><% List<Rezept> rezepte = p.getRezepte();
+    //List<Fuion> fu = p.getZutatenVonRezept();
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
 <div class="column right">
-    <h1>Rezepte</h1>
-    <ul>
-        <li>
-            <!-- request.getRequestDispatcher("rezept.jsp").forward(request, response); -->
-            <a href="zumRez.jsp"><% out.append(rezepte.get(5).getName()); //rezept.jsp?id=1 des weat da jetzt als runter klappen gemacht%></a>
-        </li>
-        <li>
-            <!-- request.getRequestDispatcher("index.jsp").forward(request, response); -->
-            <a href="zumRez.jsp"><% out.append(rezepte.get(0).getName()); %></a>
-        </li>
-        <li>
-            <a href=""><% out.append(rezepte.get(3).getName()); %></a>
-        </li>
-    </ul>
+    <h1><%out.append(rezepte.get(5).getName());%></h1>
+    <table style="width:100%; text-align: center">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Zutaten</th>
+            <th>Anleitung</th>
+            <th>Bild?</th>
+        </tr>
+        <tr>
+            <td><% out.append((char) rezepte.get(5).getId());%></td>
+            <td><% out.append(rezepte.get(5).getName());%></td>
+            <td><% out.append(p.getZutatenVonRezept(5));%></td>     <!-- ja des sollt ah hübscher sein -->
+            <td><% out.append(rezepte.get(5).getAnleitung());%></td>
+            <td><picture>
+                    <img src="\images\fast_rumkugeln.jpeg" alt="rum Kugeln" style="width:auto;">        <!--hmmm why geht des ned? ...-->
+                </picture>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

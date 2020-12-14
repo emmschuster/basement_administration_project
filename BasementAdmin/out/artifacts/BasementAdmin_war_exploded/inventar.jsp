@@ -73,10 +73,10 @@
         <a href="inventar.jsp">Inventar</a>
     </div>
     <div class="column small">
-        <a href="rhinzu.html">Rezept hinzufügen</a>
+        <a href="index.jsp">Rezept hinzufügen</a>
     </div>
     <div class="column small">
-        <a href="invhinzu.html">Inventar erweitern</a>
+        <a href="index.jsp">Inventar erweitern</a>
     </div>
 </div>
 <p><% List<Inventar> inv = p.getInventar();
@@ -100,6 +100,20 @@
                 <td><% out.append((char) inv.get(1).getMinmenge());%></td>
                 <td>no ned vorhanden</td>
                 <td><% out.append(inv.get(1).getEinheit());%></td>
+            </tr>
+            <tr>
+                <td><% out.append((char) inv.get(2).getId());%></td>
+                <td><% out.append(inv.get(2).getName());%></td>
+                <td><% out.append((char) inv.get(2).getMinmenge());%></td>
+                <td>no ned vorhanden</td>
+                <td><% out.append(inv.get(2).getEinheit());%></td>
+            </tr>
+            <tr>
+                <td><% out.append((char) inv.get(3).getId());%></td>
+                <td><% out.append(inv.get(3).getName());%></td>
+                <td><% out.append((char) inv.get(3).getMinmenge());%></td>
+                <td>no ned vorhanden</td>
+                <td><% out.append(inv.get(3).getEinheit());%></td>
             </tr>
         </table>
     </div>

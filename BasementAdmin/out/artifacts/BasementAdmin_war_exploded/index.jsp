@@ -72,10 +72,10 @@
         <a href="inventar.jsp">Inventar</a>
     </div>
     <div class="column small">
-        <a href="rhinzu.html">Rezept hinzufügen</a>
+        <a href="index.jsp">Rezept hinzufügen</a>
     </div>
     <div class="column small">
-        <a href="invhinzu.html">Inventar erweitern</a>
+        <a href="index.jsp">Inventar erweitern</a>
     </div>
 </div>
 <p><% List<Rezept> rezepte = p.getRezepte();

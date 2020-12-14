@@ -71,10 +71,10 @@
         <a href="inventar.jsp">Inventar</a>
     </div>
     <div class="column small">
-        <a href="rhinzu.html">Rezept hinzufügen</a>
+        <a href="index.jsp">Rezept hinzufügen</a>
     </div>
     <div class="column small">
-        <a href="invhinzu.html">Inventar erweitern</a>
+        <a href="index.jsp">Inventar erweitern</a>
     </div>
 </div>
 <p><% List<Rezept> rezepte = p.getRezepte();
@@ -85,11 +85,11 @@
     <ul>
         <li>
             <!-- request.getRequestDispatcher("rezept.jsp").forward(request, response); -->
-            <a href="rezept.jsp"><% out.append(rezepte.get(5).getName()); //rezept.jsp?id=1 des weat da jetzt als runter klappen gemacht%></a>
+            <a href="zumRez.jsp"><% out.append(rezepte.get(5).getName()); //rezept.jsp?id=1 des weat da jetzt als runter klappen gemacht%></a>
         </li>
         <li>
             <!-- request.getRequestDispatcher("index.jsp").forward(request, response); -->
-            <a href="index.jsp"><% out.append(rezepte.get(0).getName()); %></a>
+            <a href="zumRez.jsp"><% out.append(rezepte.get(0).getName()); %></a>
         </li>
         <li>
             <a href=""><% out.append(rezepte.get(3).getName()); %></a>
