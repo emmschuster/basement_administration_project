@@ -5,8 +5,17 @@ public class Rezept {
     private String name;
     private String anleitung;
 
+    /* public String getId() {
+        String s = Integer.toString(id);
+        return s;
+    }
     public int getId() {
         return id;
+    } */
+
+    public String getId() {
+        String s = String.valueOf(id);
+        return s;
     }
 
     public String getName() {

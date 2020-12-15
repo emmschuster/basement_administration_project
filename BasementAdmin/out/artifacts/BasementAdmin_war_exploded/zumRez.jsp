@@ -103,7 +103,13 @@
             <th>Bild?</th>
         </tr>
         <tr>
-            <td><% out.append((char) rezepte.get(5).getId());%></td>
+            <td><% /*try {
+                out.append((char) rezepte.get(27).getId());
+            } catch (Exception e) {
+                out.append("Datenbankfehler");
+            }*/
+                rezepte.get(5).getId();
+            %></td>
             <td><% out.append(rezepte.get(5).getName());%></td>
             <td><% out.append(p.getZutatenVonRezept(5));%></td>     <!-- ja des sollt ah hübscher sein -->
             <td><% out.append(rezepte.get(5).getAnleitung());%></td>
@@ -111,7 +117,7 @@
                     <img src="\images\fast_rumkugeln.jpeg" alt="rum Kugeln" style="width:auto;">        <!--hmmm why geht des ned? ...-->
                 </picture>
             </td>
-        </tr>
+         </tr>
     </table>
 </div>
 </body>
