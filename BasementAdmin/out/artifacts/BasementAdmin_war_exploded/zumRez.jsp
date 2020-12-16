@@ -103,13 +103,7 @@
             <th>Bild?</th>
         </tr>
         <tr>
-            <td><% /*try {
-                out.append((char) rezepte.get(27).getId());
-            } catch (Exception e) {
-                out.append("Datenbankfehler");
-            }*/
-                rezepte.get(5).getId();
-            %></td>
+            <td><% out.append(String.valueOf(rezepte.get(5).getId())); %></td>
             <td><% out.append(rezepte.get(5).getName());%></td>
             <td><% out.append(p.getZutatenVonRezept(5));%></td>     <!-- ja des sollt ah hübscher sein -->
             <td><% out.append(rezepte.get(5).getAnleitung());%></td>

@@ -95,23 +95,23 @@
                 <th>Einheit</th>
             </tr>
             <tr>
-                <td><% out.append((char) inv.get(1).getId());%></td>
+                <td><% out.append(String.valueOf(inv.get(1).getId()));%></td>
                 <td><% out.append(inv.get(1).getName());%></td>
-                <td><% out.append((char) inv.get(1).getMinmenge());%></td>
+                <td><% out.append(String.valueOf(inv.get(1).getMinmenge()));%></td>
                 <td>no ned vorhanden</td>
                 <td><% out.append(inv.get(1).getEinheit());%></td>
             </tr>
             <tr>
-                <td><% out.append((char) inv.get(2).getId());%></td>
+                <td><% out.append(String.valueOf(inv.get(2).getId()));%></td>
                 <td><% out.append(inv.get(2).getName());%></td>
-                <td><% out.append((char) inv.get(2).getMinmenge());%></td>
+                <td><% out.append(String.valueOf(inv.get(2).getMinmenge()));%></td>
                 <td>no ned vorhanden</td>
                 <td><% out.append(inv.get(2).getEinheit());%></td>
             </tr>
             <tr>
-                <td><% out.append((char) inv.get(3).getId());%></td>
+                <td><% out.append(String.valueOf(inv.get(3).getId()));%></td>
                 <td><% out.append(inv.get(3).getName());%></td>
-                <td><% out.append((char) inv.get(3).getMinmenge());%></td>
+                <td><%out.append(String.valueOf(inv.get(3).getMinmenge()));%></td>
                 <td>no ned vorhanden</td>
                 <td><% out.append(inv.get(3).getEinheit());%></td>
             </tr>
