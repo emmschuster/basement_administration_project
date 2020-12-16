@@ -59,7 +59,6 @@
     Connection con = dm.getConnection();
     Perform p = new Perform(con);
 %>
-
 <div class="column left">
     <h3>Inhaltsverzeichnis</h3>
     <div class="column small">
@@ -81,11 +80,9 @@
 <p><% List<Rezept> rezepte = p.getRezepte();
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
+
 <div class="column right">
-    <h1>Willkommen im Keller</h1>
-    <h2 style="margin: 100px">Statistik?!</h2>
+    <h1>Rezept hinzufügen</h1>
 </div>
 </body>
 </html>
-
-

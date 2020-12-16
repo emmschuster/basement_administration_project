@@ -82,7 +82,7 @@
         <a href="inventar.jsp">Inventar</a>
     </div>
     <div class="column small">
-        <a href="index.jsp">Rezept hinzufügen</a>
+        <a href="rezhinzu.jsp">Rezept hinzufügen</a>
     </div>
     <div class="column small">
         <a href="index.jsp">Inventar erweitern</a>
