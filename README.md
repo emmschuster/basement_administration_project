@@ -14,4 +14,4 @@ The goal of this poject is taht I don't need a written book for my recipes anymo
 git clone https://github.com/emmschuster/basement_administration_project
 ```
 ## Contact
-If you have questions/concerns/comments, please feel free to contact me and send my an [E-Mail](emmschuster@tsn.at)
+If you have questions/concerns/comments, please feel free to contact me and send my an E-Mail to emmschuster@tsn.at
