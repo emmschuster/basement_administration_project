@@ -45,6 +45,19 @@
             margin: 20px;
             height: 600px;
         }
+        .zutanten {
+            width: 400px;
+            margin: 5px;
+            height: 300px;
+            background-color: indianred;
+        }
+        .zutlinks {
+            width: 400px;
+            float: left;        
+            margin: 5px;
+            height: 300px;
+            background-color: indianred;
+        }
     </style>
 </head>
 
@@ -83,6 +96,36 @@
 
 <div class="column right">
     <h1>Rezept hinzufügen</h1>
+
+    <form action = "rezhinzu.jsp" method = "GET">
+        <div class="zutlinks">
+            Rezeptname <input type = "text" name = "first_name">
+            <br/>
+            Anleitung <input type = "text" name = "last_name" />
+            <br/>
+        </div>
+        <div class="zutanten">
+            Zutat 1 <input type = "text" name = "first_name">
+            <br/>
+            Menge Zutat 1 <input type = "text" name = "last_name" />
+            <br/>
+            <input type = "checkbox" name = "kg"  /> kg         <!--checked = "checked" wenn eines von Anfang an sein gecheckt sein soll-->
+            <input type = "checkbox" name = "L"  /> L
+            <input type = "checkbox" name = "pkg"  /> pkg
+            <br/> <br/>
+            Zutat 2 <input type = "text" name = "first_name">
+            <br/>
+            Menge Zutat 2 <input type = "text" name = "last_name" />
+            <br/>
+            <input type = "checkbox" name = "kg"  /> kg
+            <input type = "checkbox" name = "L"  /> L
+            <input type = "checkbox" name = "pkg"  /> pkg
+        </div>
+
+
+        <input type = "submit" value = "Submit" />
+    </form>
+
 </div>
 </body>
 </html>

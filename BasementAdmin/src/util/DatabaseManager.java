@@ -39,4 +39,12 @@ public class DatabaseManager {
         if (con != null)
             con.close();
     }
+    public DatabaseManager instance;
+    public DatabaseManager getInstance () throws SQLException, ClassNotFoundException {
+        if (instance == null) {
+            instance = new DatabaseManager();
+        }
+        return instance;
+    }
+
 }
