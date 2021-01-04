@@ -39,12 +39,35 @@ public class DatabaseManager {
         if (con != null)
             con.close();
     }
-    public DatabaseManager instance;
-    public DatabaseManager getInstance () throws SQLException, ClassNotFoundException {
+
+    private static DatabaseManager instance = null;
+    public static DatabaseManager getInstance () throws SQLException, ClassNotFoundException {
         if (instance == null) {
             instance = new DatabaseManager();
         }
         return instance;
     }
 
+    public boolean rezeptVorhanden(Connection con, String rezID) throws SQLException {
+        boolean vorhanden = false;
+        PreparedStatement stm=null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT COUNT(*) FROM rezept WHERE rezID = ? ";
+            stm = con.prepareStatement(sql);
+            stm.setString( 1, rezID);
+            rs=stm.executeQuery();
+            if (rs.next()) {
+                int anzahl = rs.getInt(1);
+                vorhanden = anzahl == 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return vorhanden;
+    }
 }
