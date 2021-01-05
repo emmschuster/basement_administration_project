@@ -83,6 +83,20 @@ public class Perform {
         return list;
     }
 
+    public Rezept getRezeptById(int id) {
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs0 = stmt.executeQuery("SELECT * FROM Rezept WHERE rezid = " + id + ";");
+            if (rs0.next()) {
+                String name = rs0.getString("name");
+                String anleitung = rs0.getString("anleitung");
+                return(new Rezept(id, name, anleitung));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public List<Rezept> getRezepte() {
         List<Rezept> list = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {

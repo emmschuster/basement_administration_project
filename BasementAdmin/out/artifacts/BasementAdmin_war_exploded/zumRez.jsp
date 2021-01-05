@@ -88,12 +88,9 @@
         <a href="index.jsp">Inventar erweitern</a>
     </div>
 </div>
-<p><% List<Rezept> rezepte = p.getRezepte();
-    //List<Fuion> fu = p.getZutatenVonRezept();
-    //out.append(String.valueOf(rezepte.get(0).getId()));
-    //out.append(rezepte.get(0).getName()); %></p>
+<p><% Rezept rezept = p.getRezeptById(Integer.parseInt(request.getParameter("id"))); %></p>
 <div class="column right">
-    <h1><%out.append(rezepte.get(5).getName());%></h1>
+    <h1><% out.append(rezept.getName()); %></h1>
     <table style="width:100%; text-align: center">
         <tr>
             <th>ID</th>
@@ -103,10 +100,10 @@
             <th>Bild?</th>
         </tr>
         <tr>
-            <td><% out.append(String.valueOf(rezepte.get(5).getId())); %></td>
-            <td><% out.append(rezepte.get(5).getName());%></td>
-            <td><% out.append(p.getZutatenVonRezept(5));%></td>     <!-- ja des sollt ah hübscher sein -->
-            <td><% out.append(rezepte.get(5).getAnleitung());%></td>
+            <td><% out.append(String.valueOf(rezept.getId())); %></td>
+            <td><% out.append(rezept.getName());%></td>
+            <td><% out.append(p.getZutatenVonRezept(rezept.getId()));%></td>
+            <td><% out.append(rezept.getAnleitung());%></td>
             <td><picture>
                     <img src="\images\fast_rumkugeln.jpeg" alt="rum Kugeln" style="width:auto;">        <!--hmmm why geht des ned? ...-->
                 </picture>

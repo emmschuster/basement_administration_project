@@ -83,17 +83,11 @@
 <div class="column right">
     <h1>Rezepte</h1>
     <ul>
-        <li>
-            <!-- request.getRequestDispatcher("rezept.jsp").forward(request, response); -->
-            <a href="zumRez.jsp"><% out.append(rezepte.get(5).getName()); //rezept.jsp?id=1 des weat da jetzt als runter klappen gemacht%></a>
-        </li>
-        <li>
-            <!-- request.getRequestDispatcher("index.jsp").forward(request, response); -->
-            <a href="zumRez.jsp"><% out.append(rezepte.get(0).getName()); %></a>
-        </li>
-        <li>
-            <a href=""><% out.append(rezepte.get(3).getName()); %></a>
-        </li>
+        <% for (Rezept rezept : rezepte) { %>
+            <li>
+                <a href="zumRez.jsp?id=<%= rezept.getId() %>"><%= rezept.getName() %></a>
+            </li>
+        <%}%>
     </ul>
 </div>
 </body>
