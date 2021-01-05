@@ -86,11 +86,15 @@
     <h1>Rezept hinzufügen</h1>
 
     <form action = "rezhinzu.jsp" method = "GET">
-        
-            Rezeptname <input type = "text" name = "first_name">
-            <br/>
-            Anleitung <input type = "text" name = "last_name" />
-            <br/>
+
+        <label for="name1">Rezeptname</label>
+        <input id="name1" type="text" name="nameZut1" placeholder="muffin" />
+        <br/>
+
+        <label for="anleitung1" style="width: 100px">Anleitung</label>
+        <input id="anleitung1" type="text" name="anleitungZut1" placeholder="einfach alles zammen schmeißen, mixen und bei 180°C 10 min backen" />
+        <br/>
+        <br/>
 
             Zutat 1 <input type = "text" name = "zutat1">
             <br/>
@@ -98,19 +102,26 @@
             <input id="amountOfIngredient1" type="number" name="mengeZutat1" placeholder="Kilogramm Zutat 1" />
             <br/>
 
-            <input type = "checkbox" name = "kg"  /> kg         <!--checked = "checked" wenn eines von Anfang an sein gecheckt sein soll-->
-            <input type = "checkbox" name = "L"  /> L
-            <input type = "checkbox" name = "pkg"  /> pkg
-            <br/> <br/>
-            Zutat 2 <input type = "text" name = "first_name">
-            <br/>
-            Menge Zutat 2 <input type = "text" name = "last_name" />
-            <br/>
             <input type = "checkbox" name = "kg"  /> kg
             <input type = "checkbox" name = "L"  /> L
             <input type = "checkbox" name = "pkg"  /> pkg
+            <br/> <br/>
+
+        Zutat 2 <input type = "text" name = "zutat1">
+        <br/>
+        <label for="amountOfIngredient2">Menge von Zutat 2</label><br>
+        <input id="amountOfIngredient2" type="number" name="mengeZutat2" placeholder="Kilogramm Zutat 2" />
+        <br/>
+
+        <input type = "checkbox" name = "kg"  /> kg
+        <input type = "checkbox" name = "L"  /> L
+        <input type = "checkbox" name = "pkg"  /> pkg
+        <br/> <br/>
 
         <input type = "submit" value = "Submit" />
+
+
+
     </form>
 
 </div>
