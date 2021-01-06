@@ -46,7 +46,46 @@
             height: 600px;
         }
 
+        .delete {
+            color: indianred;
+        }
+
     </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var max_fields      = 20;
+            var wrapper         = $(".container1");
+            var add_button      = $(".add_form_field");
+
+            var x = 1;
+            $(add_button).click(function(e){
+                e.preventDefault();
+                var counter = 2; //oida wie kann i de variable nach zutat einfuegen?!
+                if(x < max_fields){
+                    x++;
+                    $(wrapper).append('<div>zutat<input type="text" name="mytext[]" >\n' +
+                        '            <label for="amountOfIngredient2">Menge von Zutat</label> <br>\n' +
+                        '            <input id="amountOfIngredient" type="number" name="mengeZutat" placeholder="Kilogramm Zutat " />\n' +
+                        '            <input type = "checkbox" name = "kg"  /> kg\n' +
+                        '            <input type = "checkbox" name = "L"  /> L\n' +
+                        '            <input type = "checkbox" name = "pkg"  /> pkg<a href="#" class="delete">Delete</a></div>');
+
+                            counter++;
+                }
+                else
+                {
+                    alert('You Reached the limits')
+                }
+            });
+
+            $(wrapper).on("click",".delete", function(e){
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+        });
+    </script>
+
 </head>
 
 <body>
@@ -81,7 +120,6 @@
 <p><% List<Rezept> rezepte = p.getRezepte();
     //out.append(String.valueOf(rezepte.get(0).getId()));
     //out.append(rezepte.get(0).getName()); %></p>
-
 <div class="column right">
     <h1>Rezept hinzufügen</h1>
 
@@ -107,21 +145,16 @@
             <input type = "checkbox" name = "pkg"  /> pkg
             <br/> <br/>
 
-        Zutat 2 <input type = "text" name = "zutat1">
-        <br/>
-        <label for="amountOfIngredient2">Menge von Zutat 2</label><br>
-        <input id="amountOfIngredient2" type="number" name="mengeZutat2" placeholder="Kilogramm Zutat 2" />
-        <br/>
+        <div class="container1">
+            <button class="add_form_field">Add Zutat &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+        </div>
 
-        <input type = "checkbox" name = "kg"  /> kg
-        <input type = "checkbox" name = "L"  /> L
-        <input type = "checkbox" name = "pkg"  /> pkg
         <br/> <br/>
 
         <input type = "submit" value = "Submit" />
     </form>
-    <%Rezept rezept = p.insertRezept(Integer.parseInt(request.getParameter("id"))); %>
+    <%//Rezept rezept = p.insertRezept(Integer.parseInt(request.getParameter("id"))); %>
 
-</div>
+    </div>
 </body>
 </html>

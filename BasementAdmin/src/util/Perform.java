@@ -4,10 +4,7 @@ import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import models.Inventar;
 import models.Rezept;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,18 +135,15 @@ public class Perform {
 
     /*public Rezept insertRezept(String nameR, String anleitung, String nameZ,  String name) throws SQLException {
         String sql = "INSERT INTO rezept (name,anleitung) values (?,?,?,?)";
-        Statement stmt = conn.createStatement();
-        ResultSet rs0 = stmt.executeQuery(sql);
+        PreparedStatement stm = null;
         try {
-            rs0 = (ResultSet) conn.prepareStatement(sql);
-            rs0.setInt( 1, k.getVonbenutzerid());
+            stm = conn.prepareStatement(sql);
+            stm.setInt( 1, r.getRe);
             stm.setInt(2, k.getZuartikelid());
-            stm.setString( 3, k.getKommentar());
-            stm.setInt(4, k.getZukommentarid());
             stm.executeUpdate();
         }
         finally {
             if (stm != null) stm.close();
         }
-    } */
+    }*/
 }
