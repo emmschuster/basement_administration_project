@@ -104,9 +104,9 @@
             <td><% out.append(rezept.getName());%></td>
             <td><% out.append(p.getZutatenVonRezept(rezept.getId()));%></td>
             <td><% out.append(rezept.getAnleitung());%></td>
-            <td><picture>
-                    <img src="\images\fast_rumkugeln.jpeg" alt="rum Kugeln" style="width:auto;">        <!--hmmm why geht des ned? ...-->
-                </picture>
+            <td> <!-- <picture>
+                    <img src="\images\fast_rumkugeln.jpeg" alt="rum Kugeln" style="width:auto;">        hmmm why geht des ned? ...
+                </picture> -->
             </td>
          </tr>
     </table>

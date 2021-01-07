@@ -1,11 +1,13 @@
 package util;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import models.Inventar;
 import models.Rezept;
+import org.omg.CORBA.OBJECT_NOT_EXIST;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Perform {
@@ -131,6 +133,83 @@ public class Perform {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public Rezept insertRezept(String rezname, String anleitung, LinkedHashMap<String, HashMap<String, Object>> zutaten) throws SQLException {
+        // Checken ob irgenda zutat de übergeben wead scho in da datenbank existiert, wenn ja => wiederverwenden.
+        // Wenn Zutat nid in DB dann neue eintragen.
+        // Neues Rezept in Rezept-Table eintragen.
+        // In Fusions-Table grad erzeugtes Rezept mit ID eintragen und alle Zutaten + deren Menge entsprechend eintragen.
+
+        // Alle nicht vorhandenen Zutaten eintragen.
+        for (String key : zutaten.keySet()) {
+            if (!this.zutatExisitert(key)) {
+                this.insertZutat(key, (Float) zutaten.get(key).get("Menge"), (Einheit) zutaten.get(key).get("Einheit"));
+            }
+        }
+
+        // Neues Rezept einfügen.
+        conn.createStatement().executeUpdate(String.format("INSERT INTO rezept (Name, Anleitung) VALUES(%s, %s);", rezname, anleitung));
+
+        // Rezept und Zutaten in Fusions-Table eintragen
+        // ---------------------------------------------
+        // rezeptID vom gerade erstellten Rezept
+        final int rezeptID = conn.createStatement().executeUpdate(
+                String.format("SELECT RezID FROM rezept WHERE Name = %s AND Anleitung = %s", rezname, anleitung));
+
+        // IDs aller benötigten Zutaten
+        /*
+        ArrayList<Integer> zutatenIDs = new ArrayList<>();
+        for (String key : zutaten.keySet()) {
+            zutatenIDs.add(conn.createStatement().executeUpdate(String.format("SELECT ZutID FROM zutat WHERE Name = %s;", key)));
+        }
+        */
+
+        int[] zutatenIDs = new int[zutaten.size()];
+        for (int i = 0; i < zutaten.size(); i++) {
+            zutatenIDs[i] = conn.createStatement().executeUpdate(String.format("SELECT ZutID FROM zutat WHERE Name = %s;",
+                    zutaten.keySet().toArray()[i]));
+        }
+
+        // Rezept und zugehörige Zutaten in Fusions-Table eintragen.
+        // TODO: zutatID irgendwie herbekommen ... -> ZutatID zum String Key herbekommen !
+        /*for (String key : zutaten.keySet()) {
+            conn.createStatement().executeUpdate(String.format("INSERT INTO fusion (Menge, ZutID, RezID) VALUES()",
+                    (float) zutaten.get(key).get("Menge"),
+                    zutatenIDs[new ArrayList(zutaten.keySet()).get()],
+                    rezeptID));
+        }*/
+
+        /*
+
+            "Reismehl": {
+                "Menge": 0.3F,
+                "Einheit: Einheit.KG
+            }
+
+         */
+
+
+
+
+        Statement stm=conn.createStatement();
+
+        int i=stm.executeUpdate("INSERT INTO rezept (name,anleitung) values ('"+rezname+"','"+anleitung+"')");
+        return null;        //is return 0 da ok? oder soll i void machen? oida besser eig ge
+    }
+
+    public boolean zutatExisitert(final String zutatName) throws SQLException {
+        final int i = conn.createStatement().executeUpdate(String.format("SELECT COUNT(*) FROM zutat WHERE NAME = %s;", zutatName));
+        if (i > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public void insertZutat(final String zutat, final float minMenge, final Einheit einheit) throws SQLException {
+        conn.createStatement().executeUpdate(
+                String.format("INSERT INTO zutat (Name, minMange, Einheit) VALUES(%s, %s, %s)",
+                zutat, minMenge, einheit.getEinheitLabel()));
     }
 
     /*public Rezept insertRezept(String nameR, String anleitung, String nameZ,  String name) throws SQLException {

@@ -3,6 +3,8 @@
 <%@ page import="util.Perform" %>
 <%@ page import="models.Rezept" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.LinkedHashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -125,12 +127,12 @@
 
     <form action = "rezhinzu.jsp" method = "GET">
 
-        <label for="name1">Rezeptname</label>
-        <input id="name1" type="text" name="nameZut1" placeholder="muffin" />
+        <label for="rezname">Rezeptname</label>
+        <input id="rezname" type="text" name="nameZut1" placeholder="muffin" />
         <br/>
 
-        <label for="anleitung1" style="width: 100px">Anleitung</label>
-        <input id="anleitung1" type="text" name="anleitungZut1" placeholder="einfach alles zammen schmeißen, mixen und bei 180°C 10 min backen" />
+        <label for="anleitung" style="width: 100px">Anleitung</label>
+        <input id="anleitung" type="text" name="anleitungRez" placeholder="einfach alles zammen schmeißen, mixen und bei 180°C 10 min backen" />
         <br/>
         <br/>
 
@@ -153,7 +155,20 @@
 
         <input type = "submit" value = "Submit" />
     </form>
-    <%//Rezept rezept = p.insertRezept(Integer.parseInt(request.getParameter("id"))); %>
+    <%
+        /*String rezname=request.getParameter("rezname");
+        String anleitung=request.getParameter("anleitungrez");
+        String Zutat=request.getParameter("zutat");
+        String Einheit=request.getParameter("einheit");
+        float Menge = Float.parseFloat(request.getParameter("menge"));
+        HashMap<String, HashMap<String, Object>> map = new HashMap<String, HashMap<String, Object>>() {{
+            put("Zutat", new HashMap<String, Object>() {{
+                put("Menge", Menge);
+                put("Einheit", Einheit);
+            }});
+        }};
+        p.insertRezept(rezname, anleitung, (LinkedHashMap<String, HashMap<String, Object>>) map); */
+    %>
 
     </div>
 </body>
