@@ -211,18 +211,4 @@ public class Perform {
                 String.format("INSERT INTO zutat (Name, minMange, Einheit) VALUES(%s, %s, %s)",
                 zutat, minMenge, einheit.getEinheitLabel()));
     }
-
-    /*public Rezept insertRezept(String nameR, String anleitung, String nameZ,  String name) throws SQLException {
-        String sql = "INSERT INTO rezept (name,anleitung) values (?,?,?,?)";
-        PreparedStatement stm = null;
-        try {
-            stm = conn.prepareStatement(sql);
-            stm.setInt( 1, r.getRe);
-            stm.setInt(2, k.getZuartikelid());
-            stm.executeUpdate();
-        }
-        finally {
-            if (stm != null) stm.close();
-        }
-    }*/
 }

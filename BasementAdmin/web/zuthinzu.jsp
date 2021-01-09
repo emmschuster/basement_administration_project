@@ -3,11 +3,13 @@
 <%@ page import="util.Perform" %>
 <%@ page import="models.Rezept" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.LinkedHashMap" %>
+<%@ page import="util.Einheit" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <!-- <link 	rel="StyleSheet" href="allinall.css">
-    <jsp:include page="allinall.css"/> -->
+
     <title>Kellerverwaltung</title>
     <style>
         .column{
@@ -45,15 +47,13 @@
             margin: 20px;
             height: 600px;
         }
-        .column.smallMini {
-            width: 100px;
-            background-color: #3B3838;
-            margin-left: 50px;
-            margin-right: 50px;
-            margin-top: 20px;
-            border: #767171;
+
+        .delete {
+            color: indianred;
         }
+
     </style>
+
 </head>
 
 <body>
@@ -75,9 +75,6 @@
     <div class="column small">
         <a href="rezept.jsp">Rezepte</a>
     </div>
-    <div class="column smallMini">
-        <a href="zumRez.jsp">Rezept Details</a>
-    </div>
     <div class="column small">
         <a href="inventar.jsp">Inventar</a>
     </div>
@@ -88,28 +85,42 @@
         <a href="zuthinzu.jsp">Inventar erweitern</a>
     </div>
 </div>
-<p><% Rezept rezept = p.getRezeptById(Integer.parseInt(request.getParameter("id"))); %></p>
+
 <div class="column right">
-    <h1><% out.append(rezept.getName()); %></h1>
-    <table style="width:100%; text-align: center">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Zutaten</th>
-            <th>Anleitung</th>
-            <th>Bild?</th>
-        </tr>
-        <tr>
-            <td><% out.append(String.valueOf(rezept.getId())); %></td>
-            <td><% out.append(rezept.getName());%></td>
-            <td><% out.append(p.getZutatenVonRezept(rezept.getId()));%></td>
-            <td><% out.append(rezept.getAnleitung());%></td>
-            <td> <!-- <picture>
-                    <img src="\images\fast_rumkugeln.jpeg" alt="rum Kugeln" style="width:auto;">        hmmm why geht des ned? ...
-                </picture> -->
-            </td>
-         </tr>
-    </table>
+    <h1>Zutat hinzufügen </h1>
+    <p>Das Inventar durch ein neues Produkt erweitern</p>
+    <p>als Kommer bitte [.] benutzen</p>
+
+    <form action = "zuthinzu.jsp" method = "GET">
+
+        <label for="zutname">Zutatname</label>
+        <input id="zutname" type="text" name="namez" placeholder="Dinkelmehl Typ 630" />
+        <br/>
+
+        <label for="jetztstand">Hinzufügen</label>
+        <input id="jetztstand" type="number" name="jetztSt" placeholder="1" />
+        <br/>
+
+        <input type = "checkbox" name = "kg" checked /> kg
+        <input type = "checkbox" name = "L"  /> L
+        <input type = "checkbox" name = "pkg"  /> pkg
+        <br/>
+
+        <label for="minMenge">Mindest Bestand</label>
+        <input id="minMenge" type="number" name="minMe" placeholder="0.5" />
+        <br/>
+        <br/>
+        <input type = "submit" value = "Submit" />
+    </form>
+    <%
+        /* String zutname=request.getParameter("zutname");
+        float jetztstand=Float.parseFloat(request.getParameter("jetztstand"));
+        float minmenge=Float.parseFloat(request.getParameter("minMenge"));
+        String Einheit=request.getParameter("einheit");     //wie die Einheit? */
+
+        //p.insertZutat(zutname,minmenge, util.Einheit.valueOf());
+    %>
+
 </div>
 </body>
 </html>
