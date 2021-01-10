@@ -101,10 +101,17 @@
         <input id="jetztstand" type="number" name="jetztSt" placeholder="1" />
         <br/>
 
-        <input type = "checkbox" name = "kg" checked /> kg
-        <input type = "checkbox" name = "L"  /> L
-        <input type = "checkbox" name = "pkg"  /> pkg
-        <br/>
+        <!--<input type = "radio" name = "kg" checked /> kg
+        <input type = "radio" name = "L"  /> L
+        <input type = "radio" name = "pkg"  /> pkg/Stk
+        <br/>-->
+
+        <input type="radio" id="kg" name="einheit" value="kg">
+        <label for="kg">kg</label><br>
+        <input type="radio" id="L" name="einheit" value="L">
+        <label for="L">L</label><br>
+        <input type="radio" id="Pkg/Stk" name="einheit" value="Pkg/Stk">
+        <label for="Pkg/Stk">Pkg/Stk</label><br>
 
         <label for="minMenge">Mindest Bestand</label>
         <input id="minMenge" type="number" name="minMe" placeholder="0.5" />
@@ -116,7 +123,8 @@
         /* String zutname=request.getParameter("zutname");
         float jetztstand=Float.parseFloat(request.getParameter("jetztstand"));
         float minmenge=Float.parseFloat(request.getParameter("minMenge"));
-        String Einheit=request.getParameter("einheit");     //wie die Einheit? */
+        String Einheit=request.getParameter("einheit");     //wie die Einheit? --> oida na geht schu passt danke
+        */
 
         //p.insertZutat(zutname,minmenge, util.Einheit.valueOf());
     %>

@@ -2,11 +2,11 @@ package models;
 
 public class Inventar {
         private int id;
-        private int minmenge;
+        private float minmenge;
         private String name;
         private String einheit;
 
-    public Inventar(int id, String name, int minmenge, String einheit) {
+    public Inventar(int id, String name, float minmenge, String einheit) {
         this.id = id;
         this.minmenge = minmenge;
         this.name = name;
@@ -17,7 +17,7 @@ public class Inventar {
         return id;
     }
 
-    public int getMinmenge() {
+    public float getMinmenge() {
         return minmenge;
     }
 

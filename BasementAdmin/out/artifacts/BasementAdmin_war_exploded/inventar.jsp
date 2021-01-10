@@ -76,15 +76,15 @@
         <a href="rezhinzu.jsp">Rezept hinzufügen</a>
     </div>
     <div class="column small">
-        <a href="index.jsp">Inventar erweitern</a>
+        <a href="zuthinzu.jsp">Inventar erweitern</a>
     </div>
 </div>
-<p><% List<Inventar> inv = p.getInventar();
-    List<Rezept> rezepte = p.getRezepte();
-    //out.append(String.valueOf(rezepte.get(0).getId()));
-    //out.append(rezepte.get(0).getName()); %></p>
+
 <div class="column right">
     <h1>Inventar</h1>
+    <%  List<Inventar> zutaten = p.getInventar();
+        //Inventar inv = p.getZutatById(Integer.parseInt(request.getParameter("id")));
+    %>
     <div>
         <table style="width:100%; text-align: center">
             <tr>
@@ -94,27 +94,15 @@
                 <th>aktuelle Menge</th>
                 <th>Einheit</th>
             </tr>
+            <% for (Inventar invi : zutaten) { %>
             <tr>
-                <td><% out.append(String.valueOf(inv.get(1).getId()));%></td>
-                <td><% out.append(inv.get(1).getName());%></td>
-                <td><% out.append(String.valueOf(inv.get(1).getMinmenge()));%></td>
+                <td><% out.append(String.valueOf(invi.getId()));%></td>
+                <td><% out.append(invi.getName());%></td>
+                <td><%out.append(String.valueOf(invi.getMinmenge()));%></td>
                 <td>no ned vorhanden</td>
-                <td><% out.append(inv.get(1).getEinheit());%></td>
+                <td><% out.append(invi.getEinheit());%></td>
             </tr>
-            <tr>
-                <td><% out.append(String.valueOf(inv.get(2).getId()));%></td>
-                <td><% out.append(inv.get(2).getName());%></td>
-                <td><% out.append(String.valueOf(inv.get(2).getMinmenge()));%></td>
-                <td>no ned vorhanden</td>
-                <td><% out.append(inv.get(2).getEinheit());%></td>
-            </tr>
-            <tr>
-                <td><% out.append(String.valueOf(inv.get(3).getId()));%></td>
-                <td><% out.append(inv.get(3).getName());%></td>
-                <td><%out.append(String.valueOf(inv.get(3).getMinmenge()));%></td>
-                <td>no ned vorhanden</td>
-                <td><% out.append(inv.get(3).getEinheit());%></td>
-            </tr>
+            <%}%>
         </table>
     </div>
 </div>

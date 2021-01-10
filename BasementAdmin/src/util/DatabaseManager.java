@@ -70,4 +70,27 @@ public class DatabaseManager {
         }
         return vorhanden;
     }
+
+    public boolean zutatExisitertbyID(Connection con, final String zutID) throws SQLException {
+        boolean vorhanden = false;
+        PreparedStatement stm=null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT COUNT(*) FROM zutat WHERE zutID = ? ";
+            stm = con.prepareStatement(sql);
+            stm.setString( 1, zutID);
+            rs=stm.executeQuery();
+            if (rs.next()) {
+                int anzahl = rs.getInt(1);
+                vorhanden = anzahl == 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return vorhanden;
+    }
 }

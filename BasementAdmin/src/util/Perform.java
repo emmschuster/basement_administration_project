@@ -135,6 +135,22 @@ public class Perform {
         return null;
     }
 
+    //gleiches wie getRezeptById, fürs inventar darstellen (damit des auch immer angezeigt wird)
+    public Inventar getZutatById(int id) {
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs0 = stmt.executeQuery("SELECT * FROM zutat WHERE zutID = " + id + ";");
+            if (rs0.next()) {
+                String name = rs0.getString("name");
+                float minmenge = rs0.getInt("anleitung");
+                String einheit = rs0.getString("einheit");
+                return(new Inventar(id,name,minmenge,einheit));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public Rezept insertRezept(String rezname, String anleitung, LinkedHashMap<String, HashMap<String, Object>> zutaten) throws SQLException {
         // Checken ob irgenda zutat de übergeben wead scho in da datenbank existiert, wenn ja => wiederverwenden.
         // Wenn Zutat nid in DB dann neue eintragen.

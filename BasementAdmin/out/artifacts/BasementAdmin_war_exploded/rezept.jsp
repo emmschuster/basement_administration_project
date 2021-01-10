@@ -82,7 +82,7 @@
     //out.append(rezepte.get(0).getName()); %></p>
 <div class="column right">
     <h1>Rezepte</h1>
-    <ul>
+    <ul style="list-style-type:none;">
         <% for (Rezept rezept : rezepte) { %>
             <li>
                 <a href="zumRez.jsp?id=<%= rezept.getId() %>"><%= rezept.getName() %></a>
