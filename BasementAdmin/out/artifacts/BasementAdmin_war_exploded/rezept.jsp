@@ -74,7 +74,7 @@
         <a href="rezhinzu.jsp">Rezept hinzufügen</a>
     </div>
     <div class="column small">
-        <a href="index.jsp">Inventar erweitern</a>
+        <a href="zuthinzu.jsp">Inventar erweitern</a>
     </div>
 </div>
 <p><% List<Rezept> rezepte = p.getRezepte();

@@ -1,20 +1,31 @@
 #Bild als BLOB kommt noch in die Tabelle rezept
 
+drop database kellerverw;
 create database if not exists kellerverw;
 use kellerverw;
 
 CREATE TABLE if not exists rezept (
 RezID int auto_increment not null primary key,
 Name varchar(50) not null,
-Anleitung varchar(1000) not null
+Anleitung varchar(1000) not null,
+Bild blob
 );
 
 CREATE TABLE if not exists zutat (
 ZutID int auto_increment not null primary key,
 Name varchar(50) not null,
-minMange float not null,
-Einheit varchar(5) not null
+minMange float,
+vorhandeneM float,
+Einheit int not null
 );
+
+CREATE TABLE if not exists einheitC (
+eID int not null,
+eName varchar(10) not null
+);
+
+#um die wirkliche einheit von der Zutat zu bekommen:
+SELECT einheitC.eName FROM einheitC JOIN zutat ON zutat.einheit=einheitC.eID;
 
 CREATE TABLE if not exists fusion (
 Menge float,
@@ -25,15 +36,28 @@ Foreign key (RezID) references Rezept (RezID),
 Primary key (RezID, ZutID)
 );
 
+INSERT INTO einheitC Values (1,"kg");
+INSERT INTO einheitC Values (2,"L");
+INSERT INTO einheitC Values (3,"pkg/stk");
+
 insert into rezept (Name, Anleitung) values ("Schoki Muffin", "Oamfach alles zammen schuetten");
 
-insert into zutat (Name, minMange, Einheit) values ("Mehl", 5, "kg");
-insert into zutat (Name, minMange, Einheit) values ("Zucker",3,"kg");
-insert into zutat (Name, minMange, Einheit) values ("Milch",2,"L");
+insert into zutat (Name, minMange, vorhandeneM, Einheit) values ("Mehl", 5,4,1);
+insert into zutat (Name, minMange, vorhandeneM, Einheit) values ("Milch", 1,2,2);
+insert into zutat (Name, minMange, vorhandeneM, Einheit) values ("BP", 3,4,3);
+insert into zutat (Name, minMange, vorhandeneM, Einheit) values ("Zucker", 2,2,1);
 
 insert into fusion (Menge, ZutID, RezID) values (0.3,1,1);
 insert into fusion (Menge, ZutID, RezID) values (0.25,2,1);
 insert into fusion (Menge, ZutID, RezID) values (0.12,3,1);
+
+insert into rezept (Name, Anleitung) values ("Erdbeerkuchen", "Oamfach alles zammen schuetten");
+
+insert into fusion (Menge, ZutID, RezID) values (0.5,2,2);
+insert into fusion (Menge, ZutID, RezID) values (0.25,3,2);
+insert into fusion (Menge, ZutID, RezID) values (0.12,4,2);
+
+insert into rezept (Name, Anleitung) values ('Rumkugeln', 'geiler scheiss he');
 
 #Nach weiteren INSTER-Befehlen, hier der Join um alles zu sehen:
 SELECT r.name, z.name, f.menge from Rezept r join fusion f on f.RezID = r.RezID join Zutat z on f.ZutID = z.ZutID;
@@ -42,17 +66,10 @@ SELECT r.name, z.name, f.menge from Rezept r join fusion f on f.RezID = r.RezID 
 SELECT r.name, z.name, f.menge, z.einheit from Rezept r join fusion f on f.RezID = r.RezID join Zutat z on f.ZutID = z.ZutID where r.RezID = 1;
 
 
-#Blob Bild Versuche:
-alter table rezept add Bild blob;
-
 #insert Versuch:
 insert into rezept (Name, Anleitung, Bild) values ('lebkuchen', 'Honig pickt hart he', LOAD_FILE('C:\Users\Emma Mango Jango\Desktop\HTL5\SWP-Rubner\Project\images\Lebkuchen.JPG'));
 
 select * from rezept;
 
-insert into rezept (Name, Anleitung) values ('Rumkugeln', 'geiler scheiss he');
 
-insert into zutat (Name, minMange, Einheit) values ("Koch Schoki",2,"Pkg");
-insert into fusion (Menge, ZutID, RezID) values (0.5,4,5);
-insert into fusion (Menge, ZutID, RezID) values (0.25,2,5);
-insert into fusion (Menge, ZutID, RezID) values (0.12,3,5);
+

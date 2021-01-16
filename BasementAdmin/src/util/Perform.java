@@ -67,13 +67,14 @@ public class Perform {
     public List<Inventar> getInventar() {
         List<Inventar> list = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
-            ResultSet rs0 = stmt.executeQuery("SELECT zutid, name, minmange, einheit FROM zutat;");
+            ResultSet rs0 = stmt.executeQuery("SELECT zutid, name, minmange, vorhandeneM, einheit FROM zutat;");
             while (rs0.next()) {
                 int id = rs0.getInt("zutid");
                 String name = rs0.getString("name");
                 int minmenge = rs0.getInt("minmange");
+                float vorhandeneM = rs0.getInt("vorhandeneM");
                 String einheit = rs0.getString("einheit");
-                Inventar inv = new Inventar(id, name, minmenge, einheit);
+                Inventar inv = new Inventar(id, name, minmenge, vorhandeneM, einheit);
                 list.add(inv);
             }
         } catch (SQLException ex) {
@@ -143,7 +144,8 @@ public class Perform {
                 String name = rs0.getString("name");
                 float minmenge = rs0.getInt("anleitung");
                 String einheit = rs0.getString("einheit");
-                return(new Inventar(id,name,minmenge,einheit));
+                float vorhandeneM = rs0.getInt("vorhandeneM");
+                return(new Inventar(id,name,minmenge,vorhandeneM, einheit));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

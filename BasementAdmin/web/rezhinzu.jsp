@@ -67,14 +67,14 @@
                 var counter = 2; //oida wie kann i de variable nach zutat einfuegen?!
                 if(x < max_fields){
                     x++;
-                    $(wrapper).append('<div>zutat<input type="text" name="mytext[]" >\n' +
-                        '            <label for="amountOfIngredient2">Menge von Zutat</label> <br>\n' +
-                        '            <input id="amountOfIngredient" type="number" name="mengeZutat" placeholder="Kilogramm Zutat " />\n' +
+                    $(wrapper).append('<div>zutat<input type="text" name="mytext[]" ><br/>\n' +
+                        '            <label for="amountOfIngredient2">Menge von Zutat</label> \n' +
+                        '            <input id="amountOfIngredient" type="number" name="mengeZutat" placeholder="Kilogramm Zutat " /><br/>\n' +
                         '            <input type = "checkbox" name = "kg"  /> kg\n' +
                         '            <input type = "checkbox" name = "L"  /> L\n' +
                         '            <input type = "checkbox" name = "pkg"  /> pkg<a href="#" class="delete">Delete</a></div>');
 
-                            counter++;
+                            counter++;          //der is für die labels und Zutat Nummerierung und so
                 }
                 else
                 {

@@ -99,7 +99,7 @@
                 <td><% out.append(String.valueOf(invi.getId()));%></td>
                 <td><% out.append(invi.getName());%></td>
                 <td><%out.append(String.valueOf(invi.getMinmenge()));%></td>
-                <td>no ned vorhanden</td>
+                <td><%out.append(String.valueOf(invi.getVorhandeneM()));%></td>
                 <td><% out.append(invi.getEinheit());%></td>
             </tr>
             <%}%>
