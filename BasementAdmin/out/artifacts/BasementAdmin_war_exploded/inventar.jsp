@@ -99,7 +99,22 @@
                 <td><% out.append(String.valueOf(invi.getId()));%></td>
                 <td><% out.append(invi.getName());%></td>
                 <td><%out.append(String.valueOf(invi.getMinmenge()));%></td>
-                <td><%out.append(String.valueOf(invi.getVorhandeneM()));%></td>
+                <td><!--<input id="minMenge" type="number" name="minMe" placeholder="//<%out.append(String.valueOf(invi.getVorhandeneM()));%>" /> -->
+                    <%out.append(String.valueOf(invi.getVorhandeneM()));%>
+                    <!--<div class="input-group plus-minus-input">
+                        <div class="input-group-button">
+                            <button type="button" class="button hollow circle" data-quantity="minus" data-field="quantity">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <input class="input-group-field" type="number" name="quantity" value="//<%out.append(String.valueOf(invi.getVorhandeneM()));%>">
+                        <div class="input-group-button">
+                            <button type="button" class="button hollow circle" data-quantity="plus" data-field="quantity">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>-->
+                </td>
                 <td><% out.append(invi.getEinheit());%></td>
             </tr>
             <%}%>

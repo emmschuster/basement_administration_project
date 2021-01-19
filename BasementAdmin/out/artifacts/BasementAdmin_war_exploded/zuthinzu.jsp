@@ -6,6 +6,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.LinkedHashMap" %>
 <%@ page import="util.Einheit" %>
+<%@ page import="static java.lang.Integer.parseInt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -120,13 +121,12 @@
         <input type = "submit" value = "Submit" />
     </form>
     <%
-        /* String zutname=request.getParameter("zutname");
-        float jetztstand=Float.parseFloat(request.getParameter("jetztstand"));
+        /*String zutname=request.getParameter("zutname");
+        //int jetztstand= Integer.parseInt(request.getParameter("jetztstand"));
         float minmenge=Float.parseFloat(request.getParameter("minMenge"));
-        String Einheit=request.getParameter("einheit");     //wie die Einheit? --> oida na geht schu passt danke
-        */
+        //String Einheit=request.getParameter("einheit");     //wie die Einheit? --> oida na geht schu passt danke
 
-        //p.insertZutat(zutname,minmenge, util.Einheit.valueOf());
+        p.insertZutat(zutname,minmenge, Einheit.valueOf(request.getParameter("einheit")));*/
     %>
 
 </div>

@@ -2,9 +2,11 @@ package util;
 
 import models.Inventar;
 import models.Rezept;
-import org.omg.CORBA.OBJECT_NOT_EXIST;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -228,5 +230,5 @@ public class Perform {
         conn.createStatement().executeUpdate(
                 String.format("INSERT INTO zutat (Name, minMange, Einheit) VALUES(%s, %s, %s)",
                 zutat, minMenge, einheit.getEinheitLabel()));
-    }
+    }       //Fetter Denkfehler: wo trag i ein wenn i einkaufen war?? => lösung : mach i dann alles im Inventar
 }

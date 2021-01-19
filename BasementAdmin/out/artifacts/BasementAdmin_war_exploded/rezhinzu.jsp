@@ -132,7 +132,9 @@
         <br/>
 
         <label for="anleitung" style="width: 100px">Anleitung</label>
-        <input id="anleitung" type="text" name="anleitungRez" placeholder="einfach alles zammen schmeißen, mixen und bei 180°C 10 min backen" />
+        <textarea id="anleitung" type="text" name="anleitungRez" name="message" rows="10" cols="30">schreib rein</textarea>
+        <!--<input id="anleitung" type="text" name="anleitungRez" placeholder="einfach alles zammen schmeißen, mixen
+        und bei 180°C 10 min backen" /> -->
         <br/>
         <br/>
 
@@ -168,6 +170,7 @@
             }});
         }};
         p.insertRezept(rezname, anleitung, (LinkedHashMap<String, HashMap<String, Object>>) map); */
+        //insertRezept(String rezname, String anleitung, LinkedHashMap<String, HashMap<String, Object>> zutaten)
     %>
 
     </div>
