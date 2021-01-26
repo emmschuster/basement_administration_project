@@ -67,8 +67,8 @@
                 e.preventDefault();
                 if(x < max_fields){
                     $(wrapper).append('<div>zutat<input type="text" name="nameZutat' + x + '" ><br/>\n' +
-                        '            <label for="amountOfIngredient2">Menge von Zutat</label> \n' +
-                        '            <input id="amountOfIngredient" type="number" name="mengeZutat' + x + '" placeholder="Kilogramm Zutat " /><br/>\n' +
+                        '            <label for="amountOfIngredient">Menge von Zutat</label> \n' +
+                        '            <input id="amountOfIngredient" type="number" name="mengeZutat' + x + '" placeholder="27 " /><br/>\n' +
                         '            <input type = "radio" name = "einheit' + x + '"  value="1"/> kg\n' +
                         '            <input type = "radio" name = "einheit' + x + '"  value="2"> L\n' +
                         '            <input type = "radio" name = "einheit' + x + '"  value="3"/> pkg<a href="#" class="delete">Delete</a></div>');
@@ -81,7 +81,9 @@
             });
 
             $(wrapper).on("click",".delete", function(e){
-                e.preventDefault(); $(this).parent('div').remove(); x--;
+                e.preventDefault();
+                $(this).parent('div').remove();
+                x--;
             });
         });
     </script>
@@ -145,20 +147,27 @@
         <input type = "submit" value = "Submit" />
     </form>
     <%
-        /*String rezname=request.getParameter("rezname");
-        String anleitung=request.getParameter("anleitungrez");
-        HashMap<String, HashMap<String, Object>> map = new HashMap<>();
+
+        String rezname=request.getParameter("rezname");         //hier wurde breakpoint gesetzt
+        String anleitung=request.getParameter("anleitungRez");
+
+
+        HashMap<String, HashMap<String, Object>> map = new HashMap<String, HashMap<String, Object>>();
         for (int i = 1; i <= 20; i++) {
-            String nameZutat = request.getParameter("nameZutat" + i);
-            int mengeZutat = Integer.parseInt(request.getParameter("mengeZutat" + i));
-            Einheit einheit = Einheit.getEinheitById(Integer.parseInt(request.getParameter("einheit" + i)));
+            final String nameZutat = request.getParameter("nameZutat" + i);
             if (nameZutat == null || nameZutat.isEmpty()) {
                 break;
             }
-            map.put("nameZutat" + i, new HashMap<String, Object>() {{
+            final int mengeZutat = Integer.parseInt(request.getParameter("mengeZutat"+ i));    //da isch 0 irgendwie,,,, httpsrequest findet koa menge
+            final Einheit einheit = Einheit.getEinheitById(Integer.parseInt(request.getParameter("einheit" +i)));
+
+            map.put(nameZutat, new HashMap<String, Object>() {{
                 put("Menge", mengeZutat);
                 put("Einheit", einheit);
             }});
+        }
+        if (rezname == null || rezname.isEmpty()) {
+            return;
         }
         try {
             p.insertRezept(rezname, anleitung, map);
@@ -166,7 +175,7 @@
             e.printStackTrace();
         } catch (Perform.ZutatDoesNotExistException ex) {
             out.append("OIDA de Zutat existiert ned in deiner Welt");
-        } */
+        }
     %>
 
     </div>

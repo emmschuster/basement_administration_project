@@ -91,18 +91,12 @@
 <div class="column right">
     <h1>Zutat hinzufügen </h1>
     <p>Das Inventar durch ein neues Produkt erweitern</p>
-    <p>als Kommer bitte [.] benutzen</p>
 
     <form action = "zuthinzu.jsp" method = "GET">
 
         <label for="zutname">Zutatname</label>
         <input id="zutname" type="text" name="name" placeholder="Dinkelmehl Typ 630" />
         <br/>
-
-        <!--<input type = "radio" name = "kg" checked /> kg
-        <input type = "radio" name = "L"  /> L
-        <input type = "radio" name = "pkg"  /> pkg/Stk
-        <br/>-->
 
         <input type="radio" id="kg" name="einheit" value="kg">
         <label for="kg">kg</label><br>
@@ -123,7 +117,7 @@
         }
         String name = request.getParameter("name");
         int minmenge=Integer.parseInt(request.getParameter("minMenge"));
-        String einheit=request.getParameter("einheit");     //wie die Einheit? --> oida na geht schu passt danke
+        String einheit=request.getParameter("einheit");
 
         try {
             p.insertZutat(name, minmenge, 0, Einheit.valueOf(einheit.toUpperCase()));

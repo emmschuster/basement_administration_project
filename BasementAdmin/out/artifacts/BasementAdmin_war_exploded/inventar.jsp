@@ -144,8 +144,8 @@
             let xhr = new XMLHttpRequest();
             xhr.open('GET', 'updateZutat?zutID=' + i + '&menge=' + node.innerHTML);
             xhr.send();
+            alert("wurde gespeichert")  //lüüüügner
         }
-
     }
 </script>
 </body>

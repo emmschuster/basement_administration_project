@@ -32,7 +32,7 @@ public class Perform {
         return null;
     }
 
-    public String getZutatName (int zid) {
+    public String getZutatName(int zid) {
         try (Statement stmt = conn.createStatement()) {
             String name;
             ResultSet rs0 = stmt.executeQuery("SELECT name from zutat WHERE ZutID=" + zid + ";");
@@ -129,7 +129,7 @@ public class Perform {
             if (rs0.next()) {
                 String name = rs0.getString("name");
                 String anleitung = rs0.getString("anleitung");
-                return(new Rezept(id, name, anleitung));
+                return (new Rezept(id, name, anleitung));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -146,7 +146,7 @@ public class Perform {
                 int minmenge = rs0.getInt("minMange");
                 int einheit = rs0.getInt("einheit");
                 int vorhandeneM = rs0.getInt("vorhandeneM");
-                return(new Inventar(id,name,minmenge,vorhandeneM, einheit));
+                return (new Inventar(id, name, minmenge, vorhandeneM, einheit));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -158,38 +158,51 @@ public class Perform {
 
     }
 
-    public Rezept insertRezept(String rezname, String anleitung, HashMap<String, HashMap<String, Object>> zutaten) throws SQLException, ZutatDoesNotExistException {
+    public void insertRezept(String rezname, String anleitung, HashMap<String, HashMap<String, Object>> zutaten) throws SQLException, ZutatDoesNotExistException {
         // Checken ob irgenda zutat de übergeben wead scho in da datenbank existiert, wenn ja => wiederverwenden.
         // Wenn Zutat nid in DB dann neue eintragen.
         // Neues Rezept in Rezept-Table eintragen.
         // In Fusions-Table grad erzeugtes Rezept mit ID eintragen und alle Zutaten + deren Menge entsprechend eintragen.
 
-        if (!this.zutatExisitert(rezname)) {
-            throw new ZutatDoesNotExistException();
+        for (String key : zutaten.keySet()) {
+            if (!this.zutatExisitert(key)) {
+                throw new ZutatDoesNotExistException();
+            }
         }
 
+
         // Neues Rezept einfügen.
-        conn.createStatement().executeUpdate(String.format("INSERT INTO rezept (Name, Anleitung) VALUES(%s, %s);", rezname, anleitung));
+        //conn.createStatement().executeUpdate(String.format("INSERT INTO rezept (Name, Anleitung) VALUES(\"%s\", \"%s\");", rezname, anleitung));
 
         // Rezept und Zutaten in Fusions-Table eintragen
         // ---------------------------------------------
         // rezeptID vom gerade erstellten Rezept
-        final int rezeptID = conn.createStatement().executeUpdate(
-                String.format("SELECT RezID FROM rezept WHERE Name = %s AND Anleitung = %s", rezname, anleitung));
+        Statement stm = conn.createStatement();
+
+        stm.executeUpdate("INSERT INTO rezept (name,anleitung) values ('" + rezname + "','" + anleitung + "')");
+
+
+        ResultSet rs1 = conn.createStatement().executeQuery(String.format("SELECT RezID FROM rezept WHERE Name = \"%s\"", rezname));
+        rs1.next();
+        final int rezIDnow = rs1.getInt(1);
+
 
         // IDs aller benötigten Zutaten
-        /*
-        ArrayList<Integer> zutatenIDs = new ArrayList<>();
+        /*ArrayList<Integer> zutatenIDs = new ArrayList<>();
         for (String key : zutaten.keySet()) {
-            zutatenIDs.add(conn.createStatement().executeUpdate(String.format("SELECT ZutID FROM zutat WHERE Name = %s;", key)));
-        }
-        */
+            zutatenIDs.add(conn.createStatement().executeUpdate(String.format("SELECT ZutID FROM zutat WHERE Name = "%s";", key)));
+        }*/
 
+        //oida den ändern
         int[] zutatenIDs = new int[zutaten.size()];
         for (int i = 0; i < zutaten.size(); i++) {
-            zutatenIDs[i] = conn.createStatement().executeUpdate(String.format("SELECT ZutID FROM zutat WHERE Name = %s;",
-                    zutaten.keySet().toArray()[i]));
+            ResultSet rs2 = conn.createStatement().executeQuery(String.format("SELECT ZutID FROM zutat WHERE Name = \"%s\";", zutaten.keySet().toArray()[i]));
+            rs2.next();
+            final int iii = rs2.getInt(1);
+
+            zutatenIDs[i] = iii;
         }
+
 
         // Rezept und zugehörige Zutaten in Fusions-Table eintragen.
         // TODO: zutatID irgendwie herbekommen ... -> ZutatID zum String Key herbekommen !
@@ -210,16 +223,18 @@ public class Perform {
          */
 
 
-
-
-        Statement stm=conn.createStatement();
-
-        int i=stm.executeUpdate("INSERT INTO rezept (name,anleitung) values ('"+rezname+"','"+anleitung+"')");
-        return null;        //is return 0 da ok? oder soll i void machen? oida besser eig ge
+/*
+        for (int i = 0; i < zutatenIDs.length; i++) {
+            stm = conn.createStatement();
+            stm.executeUpdate("INSERT INTO fusion (Menge, ZutID, RezID) VALUES (" + zutaten.get(i).get("Menge") + zutatenIDs[i] + rezIDnow + ")");
+            //(Menge, ZutID, RezID) values (0.5,2,2);           //irgednwie also entweder die MAP ändern oder einfach Array List (mit ArrayList drinnen) machen
+        }*/
     }
 
     public boolean zutatExisitert(final String zutatName) throws SQLException {
-        final int i = conn.createStatement().executeUpdate(String.format("SELECT COUNT(*) FROM zutat WHERE NAME = %s;", zutatName));
+        ResultSet rs = conn.createStatement().executeQuery(String.format("SELECT COUNT(*) FROM zutat WHERE NAME = \"%s\";", zutatName));
+        rs.next();
+        final int i = rs.getInt(1);
         if (i > 0) {
             return true;
         }
