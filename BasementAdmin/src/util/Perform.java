@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Perform {
@@ -74,8 +73,8 @@ public class Perform {
                 int id = rs0.getInt("zutid");
                 String name = rs0.getString("name");
                 int minmenge = rs0.getInt("minmange");
-                float vorhandeneM = rs0.getInt("vorhandeneM");
-                String einheit = rs0.getString("einheit");
+                int vorhandeneM = rs0.getInt("vorhandeneM");
+                int einheit = rs0.getInt("einheit");
                 Inventar inv = new Inventar(id, name, minmenge, vorhandeneM, einheit);
                 list.add(inv);
             }
@@ -144,9 +143,9 @@ public class Perform {
             ResultSet rs0 = stmt.executeQuery("SELECT * FROM zutat WHERE zutID = " + id + ";");
             if (rs0.next()) {
                 String name = rs0.getString("name");
-                float minmenge = rs0.getInt("anleitung");
-                String einheit = rs0.getString("einheit");
-                float vorhandeneM = rs0.getInt("vorhandeneM");
+                int minmenge = rs0.getInt("minMange");
+                int einheit = rs0.getInt("einheit");
+                int vorhandeneM = rs0.getInt("vorhandeneM");
                 return(new Inventar(id,name,minmenge,vorhandeneM, einheit));
             }
         } catch (SQLException ex) {
@@ -155,17 +154,18 @@ public class Perform {
         return null;
     }
 
-    public Rezept insertRezept(String rezname, String anleitung, LinkedHashMap<String, HashMap<String, Object>> zutaten) throws SQLException {
+    public static class ZutatDoesNotExistException extends Exception {
+
+    }
+
+    public Rezept insertRezept(String rezname, String anleitung, HashMap<String, HashMap<String, Object>> zutaten) throws SQLException, ZutatDoesNotExistException {
         // Checken ob irgenda zutat de übergeben wead scho in da datenbank existiert, wenn ja => wiederverwenden.
         // Wenn Zutat nid in DB dann neue eintragen.
         // Neues Rezept in Rezept-Table eintragen.
         // In Fusions-Table grad erzeugtes Rezept mit ID eintragen und alle Zutaten + deren Menge entsprechend eintragen.
 
-        // Alle nicht vorhandenen Zutaten eintragen.
-        for (String key : zutaten.keySet()) {
-            if (!this.zutatExisitert(key)) {
-                this.insertZutat(key, (Float) zutaten.get(key).get("Menge"), (Einheit) zutaten.get(key).get("Einheit"));
-            }
+        if (!this.zutatExisitert(rezname)) {
+            throw new ZutatDoesNotExistException();
         }
 
         // Neues Rezept einfügen.
@@ -226,9 +226,8 @@ public class Perform {
         return false;
     }
 
-    public void insertZutat(final String zutat, final float minMenge, final Einheit einheit) throws SQLException {
-        conn.createStatement().executeUpdate(
-                String.format("INSERT INTO zutat (Name, minMange, Einheit) VALUES(%s, %s, %s)",
-                zutat, minMenge, einheit.getEinheitLabel()));
+    public void insertZutat(final String name, final int minMenge, final int vorhMenge, final Einheit einheit) throws SQLException {
+        conn.createStatement().executeUpdate(String.format("INSERT INTO zutat (Name, minMange, vorhandeneM, Einheit) VALUES (\"%s\", %d, %d, %d)",
+                name, minMenge, vorhMenge, einheit.getId()));
     }       //Fetter Denkfehler: wo trag i ein wenn i einkaufen war?? => lösung : mach i dann alles im Inventar
 }

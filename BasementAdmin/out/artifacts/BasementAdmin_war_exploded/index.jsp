@@ -10,8 +10,8 @@
 <%//@ page import="com.google.gson.Gson"%>
 <%//@ page import="com.google.gson.JsonObject"%>
 
-<%/* //irgendwie geht ned aml es versuchsbeispiel aufn internet
-    Gson gsonObj = new Gson();
+<% //irgendwie geht ned aml es versuchsbeispiel aufn internet
+    /*Gson gsonObj = new Gson();
     Map<Object,Object> map = null;
     List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
 
@@ -76,7 +76,7 @@
         }
     </style>
 
-    <!--
+
     <script type="text/javascript">
         window.onload = function() {
 
@@ -101,7 +101,7 @@
 
         }
     </script>
-    -->
+
 </head>
 
 <body>

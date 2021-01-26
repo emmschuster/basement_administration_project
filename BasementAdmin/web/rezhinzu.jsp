@@ -1,10 +1,11 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="util.DatabaseManager" %>
-<%@ page import="util.Perform" %>
 <%@ page import="models.Rezept" %>
-<%@ page import="java.util.List" %>
+<%@ page import="util.DatabaseManager" %>
+<%@ page import="util.Einheit" %>
+<%@ page import="util.Perform" %>
+<%@ page import="java.sql.Connection" %>
 <%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.LinkedHashMap" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -64,17 +65,14 @@
             var x = 1;
             $(add_button).click(function(e){
                 e.preventDefault();
-                var counter = 2; //oida wie kann i de variable nach zutat einfuegen?!
                 if(x < max_fields){
-                    x++;
-                    $(wrapper).append('<div>zutat<input type="text" name="mytext[]" ><br/>\n' +
+                    $(wrapper).append('<div>zutat<input type="text" name="nameZutat' + x + '" ><br/>\n' +
                         '            <label for="amountOfIngredient2">Menge von Zutat</label> \n' +
-                        '            <input id="amountOfIngredient" type="number" name="mengeZutat" placeholder="Kilogramm Zutat " /><br/>\n' +
-                        '            <input type = "checkbox" name = "kg"  /> kg\n' +
-                        '            <input type = "checkbox" name = "L"  /> L\n' +
-                        '            <input type = "checkbox" name = "pkg"  /> pkg<a href="#" class="delete">Delete</a></div>');
-
-                            counter++;          //der is für die labels und Zutat Nummerierung und so
+                        '            <input id="amountOfIngredient" type="number" name="mengeZutat' + x + '" placeholder="Kilogramm Zutat " /><br/>\n' +
+                        '            <input type = "radio" name = "einheit' + x + '"  value="1"/> kg\n' +
+                        '            <input type = "radio" name = "einheit' + x + '"  value="2"> L\n' +
+                        '            <input type = "radio" name = "einheit' + x + '"  value="3"/> pkg<a href="#" class="delete">Delete</a></div>');
+                    x++;
                 }
                 else
                 {
@@ -84,7 +82,7 @@
 
             $(wrapper).on("click",".delete", function(e){
                 e.preventDefault(); $(this).parent('div').remove(); x--;
-            })
+            });
         });
     </script>
 
@@ -128,7 +126,7 @@
     <form action = "rezhinzu.jsp" method = "GET">
 
         <label for="rezname">Rezeptname</label>
-        <input id="rezname" type="text" name="nameZut1" placeholder="muffin" />
+        <input id="rezname" type="text" name="rezname" placeholder="muffin" />
         <br/>
 
         <label for="anleitung" style="width: 100px">Anleitung</label>
@@ -137,17 +135,6 @@
         und bei 180°C 10 min backen" /> -->
         <br/>
         <br/>
-
-            Zutat 1 <input type = "text" name = "zutat1">
-            <br/>
-            <label for="amountOfIngredient1">Menge von Zutat 1</label><br>
-            <input id="amountOfIngredient1" type="number" name="mengeZutat1" placeholder="Kilogramm Zutat 1" />
-            <br/>
-
-            <input type = "checkbox" name = "kg"  /> kg
-            <input type = "checkbox" name = "L"  /> L
-            <input type = "checkbox" name = "pkg"  /> pkg
-            <br/> <br/>
 
         <div class="container1">
             <button class="add_form_field">Add Zutat &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
@@ -160,17 +147,26 @@
     <%
         /*String rezname=request.getParameter("rezname");
         String anleitung=request.getParameter("anleitungrez");
-        String Zutat=request.getParameter("zutat");
-        String Einheit=request.getParameter("einheit");
-        float Menge = Float.parseFloat(request.getParameter("menge"));
-        HashMap<String, HashMap<String, Object>> map = new HashMap<String, HashMap<String, Object>>() {{
-            put("Zutat", new HashMap<String, Object>() {{
-                put("Menge", Menge);
-                put("Einheit", Einheit);
+        HashMap<String, HashMap<String, Object>> map = new HashMap<>();
+        for (int i = 1; i <= 20; i++) {
+            String nameZutat = request.getParameter("nameZutat" + i);
+            int mengeZutat = Integer.parseInt(request.getParameter("mengeZutat" + i));
+            Einheit einheit = Einheit.getEinheitById(Integer.parseInt(request.getParameter("einheit" + i)));
+            if (nameZutat == null || nameZutat.isEmpty()) {
+                break;
+            }
+            map.put("nameZutat" + i, new HashMap<String, Object>() {{
+                put("Menge", mengeZutat);
+                put("Einheit", einheit);
             }});
-        }};
-        p.insertRezept(rezname, anleitung, (LinkedHashMap<String, HashMap<String, Object>>) map); */
-        //insertRezept(String rezname, String anleitung, LinkedHashMap<String, HashMap<String, Object>> zutaten)
+        }
+        try {
+            p.insertRezept(rezname, anleitung, map);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Perform.ZutatDoesNotExistException ex) {
+            out.append("OIDA de Zutat existiert ned in deiner Welt");
+        } */
     %>
 
     </div>

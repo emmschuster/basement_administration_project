@@ -1,25 +1,27 @@
 package models;
 
+import util.Einheit;
+
 public class Inventar {
         private int id;
-        private float minmenge;
-        private float vorhandeneM;
+        private int minmenge;
+        private int vorhandeneM;
         private String name;
-        private String einheit;
+        private Einheit einheit;
 
-    public Inventar(int id, String name, float minmenge, float vorhandeneM, String einheit) {
+    public Inventar(int id, String name, int minmenge, int vorhandeneM, int einheit) {
         this.id = id;
         this.minmenge = minmenge;
         this.vorhandeneM = vorhandeneM;
         this.name = name;
-        this.einheit = einheit;
+        this.einheit = Einheit.getEinheitById(einheit);
     }
 
     public int getId() {
         return id;
     }
 
-    public float getMinmenge() {
+    public int getMinmenge() {
         return minmenge;
     }
 
@@ -27,9 +29,9 @@ public class Inventar {
         return name;
     }
 
-    public String getEinheit() {
+    public Einheit getEinheit() {
         return einheit;
     }
 
-    public float getVorhandeneM() {return vorhandeneM;}
+    public int getVorhandeneM() {return vorhandeneM;}
 }

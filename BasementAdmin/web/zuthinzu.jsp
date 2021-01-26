@@ -7,6 +7,7 @@
 <%@ page import="java.util.LinkedHashMap" %>
 <%@ page import="util.Einheit" %>
 <%@ page import="static java.lang.Integer.parseInt" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -95,11 +96,7 @@
     <form action = "zuthinzu.jsp" method = "GET">
 
         <label for="zutname">Zutatname</label>
-        <input id="zutname" type="text" name="namez" placeholder="Dinkelmehl Typ 630" />
-        <br/>
-
-        <label for="jetztstand">Hinzufügen</label>
-        <input id="jetztstand" type="number" name="jetztSt" placeholder="1" />
+        <input id="zutname" type="text" name="name" placeholder="Dinkelmehl Typ 630" />
         <br/>
 
         <!--<input type = "radio" name = "kg" checked /> kg
@@ -115,18 +112,24 @@
         <label for="Pkg/Stk">Pkg/Stk</label><br>
 
         <label for="minMenge">Mindest Bestand</label>
-        <input id="minMenge" type="number" name="minMe" placeholder="0.5" />
+        <input id="minMenge" type="number" name="minMenge" placeholder="1" />
         <br/>
         <br/>
         <input type = "submit" value = "Submit" />
     </form>
     <%
-        /*String zutname=request.getParameter("zutname");
-        //int jetztstand= Integer.parseInt(request.getParameter("jetztstand"));
-        float minmenge=Float.parseFloat(request.getParameter("minMenge"));
-        //String Einheit=request.getParameter("einheit");     //wie die Einheit? --> oida na geht schu passt danke
+        if (request.getParameter("name") == null) {
+            return;
+        }
+        String name = request.getParameter("name");
+        int minmenge=Integer.parseInt(request.getParameter("minMenge"));
+        String einheit=request.getParameter("einheit");     //wie die Einheit? --> oida na geht schu passt danke
 
-        p.insertZutat(zutname,minmenge, Einheit.valueOf(request.getParameter("einheit")));*/
+        try {
+            p.insertZutat(name, minmenge, 0, Einheit.valueOf(einheit.toUpperCase()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     %>
 
 </div>
