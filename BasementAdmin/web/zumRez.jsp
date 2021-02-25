@@ -75,9 +75,9 @@
     <div class="column small">
         <a href="rezept.jsp">Rezepte</a>
     </div>
-    <div class="column smallMini">
+    <!-- <div class="column smallMini">
         <a href="zumRez.jsp">Rezept Details</a>
-    </div>
+    </div> -->
     <div class="column small">
         <a href="inventar.jsp">Inventar</a>
     </div>
@@ -110,8 +110,14 @@
             </td>
         </tr>
     </table>
+
+    <form action="rezDelete.jsp?id=<%= rezept.getId() %>" method="post">
+        <button type="submit" id="rezeloesch" >Rezept l&ouml;schen</button>
+    </form>
+
     <button type="button" id="backen">BACKEN</button>
-    <button type="button" id="drucken">als PDF runterladen</button>
+    <!-- <button type="button" id="drucken">als PDF runterladen</button> -->
+
 </div>
 </body>
 </html>

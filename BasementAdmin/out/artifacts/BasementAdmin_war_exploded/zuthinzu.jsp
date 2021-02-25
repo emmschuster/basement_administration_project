@@ -102,8 +102,8 @@
         <label for="kg">kg</label><br>
         <input type="radio" id="L" name="einheit" value="L">
         <label for="L">L</label><br>
-        <input type="radio" id="Pkg/Stk" name="einheit" value="Pkg/Stk">
-        <label for="Pkg/Stk">Pkg/Stk</label><br>
+        <input type="radio" id="Stk" name="einheit" value="Stk">
+        <label for="Stk">Stk</label><br>
 
         <label for="minMenge">Mindest Bestand</label>
         <input id="minMenge" type="number" name="minMenge" placeholder="1" />

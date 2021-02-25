@@ -158,6 +158,18 @@ public class Perform {
 
     }
 
+    public void dropRezept (int rezid) throws SQLException {
+        String stm = "DELETE FROM rezept WHERE rezid = "+rezid+";";
+        Statement s=conn.createStatement();
+        s.executeUpdate(stm);
+    }
+
+    public void dropZutat (int zutid) throws SQLException {
+        String stm = "DELETE FROM zutat WHERE zutId = "+zutid+";";
+        Statement s=conn.createStatement();
+        s.executeUpdate(stm);
+    }
+
     public void insertRezept(String rezname, String anleitung, HashMap<String, HashMap<String, Object>> zutaten) throws SQLException, ZutatDoesNotExistException {
         // Checken ob irgenda zutat de übergeben wead scho in da datenbank existiert, wenn ja => wiederverwenden.
         // Wenn Zutat nid in DB dann neue eintragen.

@@ -10,20 +10,20 @@
     <jsp:include page="allinall.css"/> -->
     <title>Kellerverwaltung</title>
     <style>
-        .column{
-            text-align : center;
-            color : black;
-            background-color : #d6d6c2;
+        .column {
+            text-align: center;
+            color: black;
+            background-color: #d6d6c2;
             border: 2px solid white;
             border-radius: 0px;
-            float:left;
+            float: left;
             padding: 10px;
         }
+
         a {
             text-decoration: none;
             text-align: center;
             color: black;
-            padding: 20px;
             margin: 30px;
         }
 
@@ -83,11 +83,15 @@
 <div class="column right">
     <h1>Rezepte</h1>
     <ul style="list-style-type:none;">
-        <% for (Rezept rezept : rezepte) { %>
-            <li>
-                <a href="zumRez.jsp?id=<%= rezept.getId() %>"><%= rezept.getName() %></a>
-            </li>
-        <%}%>
+        <% for (Rezept rezept : rezepte) {
+        %>
+        <li>
+            <a href="zumRez.jsp?id=<%= rezept.getId() %>"><%= rezept.getName() %>
+            </a>
+        </li>
+        <%
+            }
+        %>
     </ul>
 </div>
 </body>

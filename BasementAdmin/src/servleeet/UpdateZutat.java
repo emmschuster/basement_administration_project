@@ -31,7 +31,7 @@ public class UpdateZutat extends HttpServlet {
 
         DatabaseManager m=null;
         try {
-            m = DatabaseManager.getInstance();
+            m = new DatabaseManager();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             response.getWriter().println("Rip Me");
