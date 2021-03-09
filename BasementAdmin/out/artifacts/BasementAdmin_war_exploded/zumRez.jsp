@@ -1,8 +1,10 @@
-<%@ page import="java.sql.Connection" %>
+<%@ page import="models.Inventar" %>
+<%@ page import="models.Rezept" %>
 <%@ page import="util.DatabaseManager" %>
 <%@ page import="util.Perform" %>
-<%@ page import="models.Rezept" %>
+<%@ page import="java.sql.Connection" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -115,8 +117,12 @@
         <button type="submit" id="rezeloesch" >Rezept l&ouml;schen</button>
     </form>
 
-    <button type="button" id="backen">BACKEN</button>
+    <form action="rezBacken.jsp?id=<%= rezept.getId() %>" method="post">
+        <button type="submit" id="rezBacken" >BACKEN</button>
+    </form>
+
     <!-- <button type="button" id="drucken">als PDF runterladen</button> -->
+
 
 </div>
 </body>

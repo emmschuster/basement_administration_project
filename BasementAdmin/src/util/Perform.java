@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,14 +56,42 @@ public class Perform {
             while (rs0.next()) {
                 zName = rs0.getString("z.name");
                 fMenge = rs0.getString("f.menge");
-                zEinheit = rs0.getString("z.einheit");
-                builder.append(zName + "  " + fMenge + "  " + zEinheit + "\n");
+                zEinheit = Einheit.getEinheitById(rs0.getInt("z.einheit")).toString();
+                builder.append(zName + "  " + fMenge + "  " + zEinheit + "</br>\n");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             //builder.append("Datenbankfehler!!!");
         }
         return builder.toString();
+    }
+
+
+    public ArrayList<ArrayList<String>> getZutatenIdMengeVonRezept(int rID) {
+        ArrayList<ArrayList<String>> zutaten=new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs0 = stmt.executeQuery("SELECT z.zutid, f.menge from Rezept r " +
+                    "join fusion f on f.RezID = r.RezID join Zutat z on f.ZutID = z.ZutID where r.RezID = " + rID);
+            while (rs0.next()) {
+                zutaten.add(new ArrayList<>(Arrays.asList(rs0.getString("z.zutid"),rs0.getString("f.menge"))));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //builder.append("Datenbankfehler!!!");
+        }
+        return zutaten;
+    }
+
+    public float getZutatenMenge(int zID) {
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs0 = stmt.executeQuery("SELECT vorhandeneM FROM zutat WHERE ZutID = " + zID + " LIMIT 1;");
+            rs0.next();
+            return rs0.getFloat("vorhandeneM");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //builder.append("Datenbankfehler!!!");
+        }
+        return 0;
     }
 
     public List<Inventar> getInventar() {
@@ -215,6 +244,13 @@ public class Perform {
             zutatenIDs[i] = iii;
         }
 
+
+        int i=0;
+        for (String key : zutaten.keySet()) {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("INSERT INTO fusion values (" + zutaten.get(key).get("Menge").toString() + "," + zutatenIDs[i] + ","+rezIDnow+");");
+            i++;
+        }
 
         // Rezept und zugehörige Zutaten in Fusions-Table eintragen.
         // TODO: zutatID irgendwie herbekommen ... -> ZutatID zum String Key herbekommen !

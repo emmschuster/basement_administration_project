@@ -88,8 +88,7 @@
 
 <div class="column right">
     <h1>Inventar</h1>
-    <%  List<Inventar> zutaten = p.getInventar();
-    %>
+    <%  List<Inventar> zutaten = p.getInventar();%>
     <div>
         <table style="width:100%; text-align: center">
             <tr>

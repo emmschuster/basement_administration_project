@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <!-- <link 	rel="StyleSheet" href="allinall.css">
     <jsp:include page="allinall.css"/> -->
     <title>Kellerverwaltung</title>
@@ -55,7 +56,6 @@
 
     </style>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
             var max_fields      = 20;
@@ -66,7 +66,8 @@
             $(add_button).click(function(e){
                 e.preventDefault();
                 if(x < max_fields){
-                    $(wrapper).append('<div>zutat<input type="text" name="nameZutat' + x + '" ><br/>\n' +
+                    $(wrapper).append('<div> \n' +
+                        '            zutat<input type="text" name="nameZutat' + x + '" ><br/>\n' +
                         '            <label for="amountOfIngredient">Menge von Zutat</label> \n' +
                         '            <input id="amountOfIngredient" type="number" name="mengeZutat' + x + '" placeholder="27 " /><br/>\n' +
                         '            <input type = "radio" name = "einheit' + x + '"  value="1"/> kg\n' +
