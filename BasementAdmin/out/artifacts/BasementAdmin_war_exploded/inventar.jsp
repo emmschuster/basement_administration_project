@@ -90,9 +90,8 @@
     <h1>Inventar</h1>
     <%  List<Inventar> zutaten = p.getInventar();%>
     <div>
-        <table style="width:100%; text-align: center">
+        <table style="width:100%; text-align: center; table-layout: fixed;">
             <tr>
-                <th style="width:10%;">ID</th>
                 <th style="width:40%;">Name</th>
                 <th style="width:15%;">min Menge</th>
                 <th style="width:15%;">aktuelle Menge</th>
@@ -101,7 +100,6 @@
             </tr>
             <% for (Inventar invi : zutaten) { %>
             <tr>
-                <td style="width:10%;"><% out.append(String.valueOf(invi.getId()));%></td>
                 <td style="width:40%;"><% out.append(invi.getName());%></td>
                 <td style="width:15%;"><%out.append(String.valueOf(invi.getMinmenge()));%></td>
                 <td style="width:15%;"><!--<input id="minMenge" type="number" name="minMe" placeholder="//<%out.append(String.valueOf(invi.getVorhandeneM()));%>" /> -->

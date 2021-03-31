@@ -93,23 +93,16 @@
 <p><% Rezept rezept = p.getRezeptById(Integer.parseInt(request.getParameter("id"))); %></p>
 <div class="column right">
     <h1><% out.append(rezept.getName()); %></h1>
-    <table style="width:100%; text-align: center">
+    <table style="width:100%; text-align: center; table-layout: fixed; margin-bottom: 50px">
         <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Zutaten</th>
             <th>Anleitung</th>
-            <th>Bild?</th>
         </tr>
         <tr>
-            <td><% out.append(String.valueOf(rezept.getId())); %></td>
             <td><% out.append(rezept.getName());%></td>
             <td><% out.append(p.getZutatenVonRezept(rezept.getId()));%></td>
             <td><% out.append(rezept.getAnleitung());%></td>
-            <td> <!-- <picture>
-                    <img src="\images\fast_rumkugeln.jpeg" alt="rum Kugeln" style="width:auto;">        hmmm why geht des ned? ...
-                </picture> -->
-            </td>
         </tr>
     </table>
 

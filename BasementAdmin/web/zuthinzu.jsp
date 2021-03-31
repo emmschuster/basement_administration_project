@@ -98,9 +98,9 @@
         <input id="zutname" type="text" name="name" placeholder="Dinkelmehl Typ 630" />
         <br/>
 
-        <input type="radio" id="kg" name="einheit" value="kg">
+        <input type="radio" id="kg" name="einheit" value="g">
         <label for="kg">kg</label><br>
-        <input type="radio" id="L" name="einheit" value="L">
+        <input type="radio" id="L" name="einheit" value="mL">
         <label for="L">L</label><br>
         <input type="radio" id="Stk" name="einheit" value="Stk">
         <label for="Stk">Stk</label><br>

@@ -1,8 +1,8 @@
 package util;
 
 public enum Einheit {
-    KG(1, "KG"),
-    L(2, "L"),
+    KG(1, "g"),
+    L(2, "ml "),
     STK(3, "STK");
 
     final int id;
