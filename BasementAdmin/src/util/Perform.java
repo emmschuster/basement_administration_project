@@ -56,7 +56,7 @@ public class Perform {
             while (rs0.next()) {
                 zName = rs0.getString("z.name");
                 fMenge = rs0.getString("f.menge");
-                zEinheit = Einheit.getEinheitById(rs0.getInt("z.einheit")).toString();
+                zEinheit = Einheit.getEinheitById(rs0.getInt("z.einheit")).einheitLabel;
                 builder.append(zName + "  " + fMenge + "  " + zEinheit + "</br>\n");
             }
         } catch (SQLException ex) {
@@ -116,12 +116,13 @@ public class Perform {
     public List<Rezept> getRezepte() {
         List<Rezept> list = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
-            ResultSet rs0 = stmt.executeQuery("SELECT rezid, name, anleitung FROM Rezept;");
+            ResultSet rs0 = stmt.executeQuery("SELECT rezid, name, anleitung, counterStatistik FROM Rezept;");
             while (rs0.next()) {
                 int id = rs0.getInt("rezid");
                 String name = rs0.getString("name");
                 String anleitung = rs0.getString("anleitung");
-                Rezept rezept = new Rezept(id, name, anleitung);
+                int counterStatistik = rs0.getInt("counterStatistik");
+                Rezept rezept = new Rezept(id, name, anleitung, counterStatistik);
                 list.add(rezept);
             }
         } catch (SQLException ex) {
@@ -158,7 +159,8 @@ public class Perform {
             if (rs0.next()) {
                 String name = rs0.getString("name");
                 String anleitung = rs0.getString("anleitung");
-                return (new Rezept(id, name, anleitung));
+                int counterStatistik = rs0.getInt("counterStatistik");
+                return (new Rezept(id, name, anleitung, counterStatistik));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

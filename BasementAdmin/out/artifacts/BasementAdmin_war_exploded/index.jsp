@@ -1,42 +1,26 @@
-<%@ page import="java.sql.Connection" %>
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="models.Rezept" %>
 <%@ page import="util.DatabaseManager" %>
 <%@ page import="util.Perform" %>
-<%@ page import="models.Rezept" %>
+<%@ page import="java.sql.Connection" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%//@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%//@ page import="java.util.*" %>
-<%//@ page import="com.google.gson.Gson"%>
-<%//@ page import="com.google.gson.JsonObject"%>
-
-<% //irgendwie geht ned aml es versuchsbeispiel aufn internet
-    /*Gson gsonObj = new Gson();
-    Map<Object,Object> map = null;
-    List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
-
-    map = new HashMap<Object,Object>(); map.put("x", 10); map.put("y", 31); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 20); map.put("y", 65); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 30); map.put("y", 40); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 40); map.put("y", 84); map.put("indexLabel", "Highest"); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 50); map.put("y", 68); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 60); map.put("y", 64); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 70); map.put("y", 38); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 80); map.put("y", 71); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 90); map.put("y", 54); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 100); map.put("y", 60); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 110); map.put("y", 21); map.put("indexLabel", "Lowest"); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 120); map.put("y", 49); list.add(map);
-    map = new HashMap<Object,Object>(); map.put("x", 130); map.put("y", 41); list.add(map);
-
-    String dataPoints = gsonObj.toJson(list);
-    */
-%>
+<%@ page import="java.util.Map" %>
 
 <html>
 <head>
     <!-- <link 	rel="StyleSheet" href="allinall.css">
     <jsp:include page="allinall.css"/> -->
+
+    <script src="canvasjs.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"
+            integrity="sha512-P0pdbdTHc6MzepVlBNGN/c+lBFfFk0ISSc/GLLnQzR5QzfgVdQMvOhVK4RvnhylawHSn2QxgAjb3f+zxSMfyNg=="
+            crossorigin="anonymous"></script>
+
     <title>Kellerverwaltung</title>
     <style>
         .column{
@@ -76,35 +60,10 @@
         }
     </style>
 
-
-    <script type="text/javascript">
-        window.onload = function() {
-
-            var chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: true,
-                exportEnabled: true,
-                title: {
-                    text: "Simple Column Chart with Index Labels"
-                },
-                axisY:{
-                    includeZero: true
-                },
-                data: [{
-                    type: "column", //change type to bar, line, area, pie, etc
-                    //indexLabel: "{y}", //Shows y value on all Data Points
-                    indexLabelFontColor: "#5A5757",
-                    indexLabelPlacement: "outside",
-                    dataPoints: <%//out.print(dataPoints);%>
-                }]
-            });
-            chart.render();
-
-        }
-    </script>
-
 </head>
 
 <body>
+
 <%
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -134,19 +93,50 @@
         <a href="zuthinzu.jsp">Inventar erweitern</a>
     </div>
 </div>
-<p><% List<Rezept> rezepte = p.getRezepte();
-    //out.append(String.valueOf(rezepte.get(0).getId()));
-    //out.append(rezepte.get(0).getName());
-%></p>
+<p>
+    <%
+        List<Rezept> rezepte = p.getRezepte();
+
+        Gson gsonObj = new Gson();
+        Map<Object,Object> map = null;
+        List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+
+        for(int i=0;i<rezepte.size();i++){
+            map = new HashMap<Object,Object>();
+            map.put("label", rezepte.get(i).getName());
+            map.put("y", rezepte.get(i).getCounter());
+            list.add(map);
+        }
+
+        String dataPoints = gsonObj.toJson(list);
+    %>
+    <script type="text/javascript">
+        window.onload = function() {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "was wurde wie oft gebacken?"
+                },
+                axisX: {
+                    title: "Gebäck"
+                },
+                axisY: {
+                    title: "Anzahl",
+                    includeZero: true
+                },
+                data: [{
+                    type: "column",
+                    dataPoints: <%out.print(dataPoints);%>
+                }]
+            });
+        }
+    </script>
+</p>
 
 <div class="column right">
     <h1>Willkommen im Keller</h1>
-    <h2 style="margin: 100px">Statistik?!</h2>
 
-    <!--
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    -->
 
 </div>
 </body>

@@ -1,13 +1,11 @@
-<%@ page import="java.sql.Connection" %>
+<%@ page import="models.Inventar" %>
 <%@ page import="util.DatabaseManager" %>
-<%@ page import="util.Perform" %>
-<%@ page import="models.Rezept" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.LinkedHashMap" %>
 <%@ page import="util.Einheit" %>
-<%@ page import="static java.lang.Integer.parseInt" %>
+<%@ page import="util.Perform" %>
+<%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="java.util.List" %>
+<%@ page import="static java.lang.Integer.parseInt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -98,10 +96,10 @@
         <input id="zutname" type="text" name="name" placeholder="Dinkelmehl Typ 630" />
         <br/>
 
-        <input type="radio" id="kg" name="einheit" value="g">
-        <label for="kg">kg</label><br>
-        <input type="radio" id="L" name="einheit" value="mL">
-        <label for="L">L</label><br>
+        <input type="radio" id="kg" name="einheit" value="kg">
+        <label for="kg">g</label><br>
+        <input type="radio" id="L" name="einheit" value="L">
+        <label for="L">ml</label><br>
         <input type="radio" id="Stk" name="einheit" value="Stk">
         <label for="Stk">Stk</label><br>
 
@@ -111,6 +109,21 @@
         <br/>
         <input type = "submit" value = "Submit" />
     </form>
+
+    <div class="column middle">
+        <% List<Inventar> zutaten = p.getInventar(); %>
+        <table style="width:100%; text-align: center">
+            <tr>
+                <th style="width:40%;">vorhandene Zutaten:</th>
+            </tr>
+                <% for (Inventar invi : zutaten) { %>
+            <tr>
+                <td style="width:40%;"><% out.append(invi.getName());%></td>
+                </td>
+            </tr>
+                <% } %>
+    </div>
+
     <%
         if (request.getParameter("name") == null) {
             return;

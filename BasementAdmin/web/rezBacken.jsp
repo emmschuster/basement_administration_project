@@ -27,7 +27,8 @@
         menge = p.getZutatenMenge(zID) - Float.parseFloat(zutaten.get(i).get(1));
         con.createStatement().executeUpdate("UPDATE zutat SET vorhandeneM = "+menge+" WHERE ZutID = "+ zID + ";");
     }
-
+    //couter für statistik
+    con.createStatement().executeUpdate("UPDATE rezept SET counterstatistik=counterstatistik+1 where rezid="+request.getParameter("id")+";");
 %>
 
 <script language="javascript" type="text/javascript"> document.location="zumRez.jsp?id=<%out.append(request.getParameter("id"));%>"; </script>

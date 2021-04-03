@@ -45,12 +45,12 @@
             background-color: #AFABAB;
         }
 
-        .column.middle {
+        /*.column.middle {
             width: 150px;
             margin: 20px;
             height: auto;
             background-color: pink;
-        }
+        } */
 
         .column.left {
             width: 200px;

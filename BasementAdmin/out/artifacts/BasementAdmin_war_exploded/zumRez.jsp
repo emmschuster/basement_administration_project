@@ -92,6 +92,11 @@
 </div>
 <p><% Rezept rezept = p.getRezeptById(Integer.parseInt(request.getParameter("id"))); %></p>
 <div class="column right">
+    <form action="rezept.jsp">
+        <div>
+            <input type="submit" value="zurück">
+        </div>
+    </form>
     <h1><% out.append(rezept.getName()); %></h1>
     <table style="width:100%; text-align: center; table-layout: fixed; margin-bottom: 50px">
         <tr>
