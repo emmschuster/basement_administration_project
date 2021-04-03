@@ -7,8 +7,7 @@ The goal of this poject is taht I don't need a written book for my recipes anymo
 ## Goals
 - save your recipes (ingredients, manuel, picture)
 - alwasy know how much you have left of one ingredients
-- having a statistic of your backing behavior (How much have i baked in the last two month and what?)
-- a warning system alerts you when you have not much left of one product (minimum stock)
+- having a statistic of your backing behavior (How much have i baked and what?)
 ## Want to install my project?
 ```
 git clone https://github.com/emmschuster/basement_administration_project
