@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 public class DatabaseManager {
     Connection con = null;
@@ -12,25 +13,46 @@ public class DatabaseManager {
         getConnection();
     }
 
+    private static <T> T getOrDefault(T value, T defaultValue) {
+        return value != null ? value : defaultValue;
+    }
+
     public Connection getConnection()
             throws ClassNotFoundException, SQLException {
         if (con != null) {
             return con;
         }
 
-        try (Scanner scan = new Scanner(new File("C:\\Users\\Emma Mango Jango\\Desktop\\HTL5\\SWP-Rubner\\password.txt"))) {
-            if (scan.hasNext()) {
-                con = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/kellerverw?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true",  // DB
-                        "root",                                 // User
-                        scan.nextLine()                        // Passwort
-                );
-                return con;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+        final String mySQLurl = getOrDefault(
+            "jdbc:mysql://" + System.getenv("MYSQL_HOST") + "/" + System.getenv("MYSQL_DB"),
+            "jdbc:mysql://localhost:3306/kellerverw?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true"
+        );
+        final String mySQLusername = getOrDefault(
+            System.getenv("MYSQL_USERNAME"),
+            "root"
+        );
+        final String mySQLpassword = getOrDefault(
+            System.getenv("MYSQL_PASSWORD"),
+            ((Supplier<String>) () -> {
+                try (Scanner scan = new Scanner(
+                    new File("C:\\Users\\Emma Mango Jango\\Desktop\\HTL5\\SWP-Rubner\\password.txt")
+                )) {
+                    if (scan.hasNext()) {
+                        return scan.nextLine();
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }).get()
+        );
+
+        con = DriverManager.getConnection(
+            mySQLurl, // DB
+            mySQLusername, // User
+            mySQLpassword // Passwort
+        );
+        return con;
     }
 
     public void releaseConnection (Connection con)
